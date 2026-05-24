@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://korewkov.ru/sitemap.xml
+Host: korewkov.ru
