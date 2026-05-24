@@ -2516,6 +2516,16 @@
       color: var(--blue);
     }
 
+    .admin-small-btn-danger {
+      border-color: rgba(255, 90, 90, .34);
+      color: rgba(255, 150, 150, .9);
+    }
+
+    .admin-small-btn-danger:hover {
+      border-color: rgba(255, 90, 90, .9);
+      color: #ff6b6b;
+    }
+
     .admin-hint {
       grid-column: 1 / -1;
       color: rgba(244,244,240,.46);
@@ -3367,6 +3377,9 @@
 
     const getCustomCases = () => JSON.parse(localStorage.getItem('korreshkovCustomCases') || '{}');
     const saveCustomCases = (customCases) => localStorage.setItem('korreshkovCustomCases', JSON.stringify(customCases));
+    const getHiddenCases = () => JSON.parse(localStorage.getItem('korreshkovHiddenCases') || '[]');
+    const saveHiddenCases = (hiddenCases) => localStorage.setItem('korreshkovHiddenCases', JSON.stringify(Array.from(new Set(hiddenCases))));
+    const isCaseHidden = (id) => getHiddenCases().includes(id);
     let externalCases = {};
     let cases = { ...defaultCases, ...getCustomCases() };
 
@@ -3393,7 +3406,11 @@
     };
 
     const syncCasesState = () => {
-      cases = { ...defaultCases, ...externalCases, ...getCustomCases() };
+      const hiddenCases = getHiddenCases();
+      cases = Object.fromEntries(
+        Object.entries({ ...defaultCases, ...externalCases, ...getCustomCases() })
+          .filter(([id]) => !hiddenCases.includes(id))
+      );
     };
 
     const loadCasesData = async () => {
@@ -3457,16 +3474,63 @@
       return makeNextCaseFolderName();
     };
 
-    const makeNextCaseFolderName = () => {
-      const allCases = { ...defaultCases, ...externalCases, ...getCustomCases() };
-      const usedNumbers = Object.entries(allCases).map(([id, item]) => {
+    const getUsedCaseNumbers = (sourceCases) => {
+      return Object.entries(sourceCases || {}).map(([id, item]) => {
         const folder = String(getCaseImageFolder(id, item) || '');
         if (!folder.startsWith('case-')) return 0;
         const number = Number(folder.slice(5));
         return Number.isFinite(number) ? number : 0;
-      });
+      }).filter(Boolean);
+    };
+
+    const makeNextCaseFolderName = () => {
+      const allCases = { ...defaultCases, ...externalCases, ...getCustomCases() };
+      const usedNumbers = getUsedCaseNumbers(allCases);
       const nextNumber = Math.max(0, ...usedNumbers) + 1;
       return 'case-' + padCaseNumber(nextNumber);
+    };
+
+    const migrateCustomCaseFolders = () => {
+      const customCases = getCustomCases();
+      const entries = Object.entries(customCases);
+      if (!entries.length) return false;
+
+      const migratedCases = {};
+      const usedNumbers = getUsedCaseNumbers({ ...defaultCases, ...externalCases, ...customCases });
+      let changed = false;
+
+      const getNextFolder = () => {
+        const nextNumber = Math.max(0, ...usedNumbers) + 1;
+        usedNumbers.push(nextNumber);
+        return 'case-' + padCaseNumber(nextNumber);
+      };
+
+      entries.forEach(([id, item]) => {
+        const folder = String(getCaseImageFolder(id, item) || '');
+        const isLegacyId = id.startsWith('custom-');
+        const isLegacyFolder = folder.startsWith('custom-') || !folder.startsWith('case-');
+
+        if (isLegacyId || isLegacyFolder) {
+          const newId = getNextFolder();
+          migratedCases[newId] = {
+            ...item,
+            imageFolder: newId
+          };
+          changed = true;
+          return;
+        }
+
+        migratedCases[id] = {
+          ...item,
+          imageFolder: folder || id
+        };
+      });
+
+      if (changed) {
+        saveCustomCases(migratedCases);
+      }
+
+      return changed;
     };
 
     const imageExists = (src) => {
@@ -3800,22 +3864,34 @@
 
     const renderAdminList = () => {
       const customCases = getCustomCases();
-      const entries = Object.entries(cases);
+      const hiddenCases = getHiddenCases();
+      const allCasesForAdmin = { ...defaultCases, ...externalCases, ...customCases };
+      const entries = Object.entries(allCasesForAdmin);
 
       adminCaseList.innerHTML = entries.map(([id, item]) => {
         const isDefault = Boolean(defaultCases[id] || externalCases[id]);
         const isChanged = Boolean(customCases[id]);
-        const state = isDefault ? (isChanged ? 'изменённый базовый кейс' : 'базовый кейс') : 'добавленный кейс';
-        const secondaryAction = isDefault
-          ? '<button class="admin-small-btn" type="button" data-reset-case="' + id + '">Вернуть</button>'
-          : '<button class="admin-small-btn" type="button" data-delete-case="' + id + '">Удалить</button>';
+        const isHidden = hiddenCases.includes(id);
+        const stateBase = isDefault ? (isChanged ? 'изменённый базовый кейс' : 'базовый кейс') : 'добавленный кейс';
+        const state = isHidden ? stateBase + ' · скрыт' : stateBase;
+        const restoreAction = isHidden
+          ? '<button class="admin-small-btn" type="button" data-show-case="' + id + '">Вернуть на сайт</button>'
+          : '';
+        const resetAction = isDefault && isChanged
+          ? '<button class="admin-small-btn" type="button" data-reset-case="' + id + '">Сбросить правки</button>'
+          : '';
+        const deleteAction = isDefault
+          ? '<button class="admin-small-btn admin-small-btn-danger" type="button" data-hide-case="' + id + '">Убрать с сайта</button>'
+          : '<button class="admin-small-btn admin-small-btn-danger" type="button" data-delete-case="' + id + '">Удалить</button>';
 
         const imageFolder = getCaseImageFolder(id, item);
         return '<div class="admin-case-row">' +
           '<div><strong>' + (item.cardTitle || item.title) + '</strong><span>' + getCaseLabel(item) + ' · приоритет ' + (item.priority ?? 1) + ' · ' + ((item.images || []).length) + ' изображений · ' + state + '</span><div class="admin-case-id"><code>ID: ' + id + '</code><code>Папка: assets/img/cases/' + imageFolder + '/</code></div></div>' +
           '<div class="admin-row-actions">' +
             '<button class="admin-small-btn" type="button" data-edit-case="' + id + '">Редактировать</button>' +
-            secondaryAction +
+            restoreAction +
+            resetAction +
+            deleteAction +
           '</div>' +
         '</div>';
       }).join('');
@@ -4171,6 +4247,9 @@
 
     const startApp = async () => {
       await loadCasesData();
+      if (migrateCustomCaseFolders()) {
+        syncCasesState();
+      }
       renderCaseCards();
       renderAdminList();
       resetAdminForm();
@@ -4326,8 +4405,11 @@
     adminCaseList.addEventListener('click', (event) => {
       const editButton = event.target.closest('[data-edit-case]');
       const deleteButton = event.target.closest('[data-delete-case]');
+      const hideButton = event.target.closest('[data-hide-case]');
+      const showButton = event.target.closest('[data-show-case]');
       const resetButton = event.target.closest('[data-reset-case]');
       const customCases = getCustomCases();
+      let hiddenCases = getHiddenCases();
 
       if (editButton) {
         setAdminEditing(editButton.dataset.editCase);
@@ -4335,13 +4417,40 @@
       }
 
       if (deleteButton) {
-        delete customCases[deleteButton.dataset.deleteCase];
+        const caseId = deleteButton.dataset.deleteCase;
+        delete customCases[caseId];
+        hiddenCases = hiddenCases.filter((id) => id !== caseId);
         saveCustomCases(customCases);
+        saveHiddenCases(hiddenCases);
         syncCasesState();
         renderCaseCards();
         renderAdminList();
         resetAdminForm();
         showToast('Кейс удалён');
+        return;
+      }
+
+      if (hideButton) {
+        const caseId = hideButton.dataset.hideCase;
+        hiddenCases.push(caseId);
+        saveHiddenCases(hiddenCases);
+        syncCasesState();
+        renderCaseCards();
+        renderAdminList();
+        resetAdminForm();
+        showToast('Кейс убран с сайта');
+        return;
+      }
+
+      if (showButton) {
+        const caseId = showButton.dataset.showCase;
+        hiddenCases = hiddenCases.filter((id) => id !== caseId);
+        saveHiddenCases(hiddenCases);
+        syncCasesState();
+        renderCaseCards();
+        renderAdminList();
+        resetAdminForm();
+        showToast('Кейс вернулся на сайт');
         return;
       }
 
@@ -4362,7 +4471,11 @@
     });
 
     adminExport.addEventListener('click', async () => {
-      const exportCases = { ...defaultCases, ...externalCases, ...getCustomCases() };
+      const hiddenCases = getHiddenCases();
+      const exportCases = Object.fromEntries(
+        Object.entries({ ...defaultCases, ...externalCases, ...getCustomCases() })
+          .filter(([id]) => !hiddenCases.includes(id))
+      );
       const text = JSON.stringify(exportCases, null, 2);
       try {
         await navigator.clipboard.writeText(text);
@@ -4375,6 +4488,7 @@
 
     adminClear.addEventListener('click', () => {
       localStorage.removeItem('korreshkovCustomCases');
+      localStorage.removeItem('korreshkovHiddenCases');
       syncCasesState();
       renderCaseCards();
       renderAdminList();
