@@ -2470,6 +2470,27 @@
       font-size: 12px;
     }
 
+    .admin-case-id {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .admin-case-id code {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 9px;
+      border: 1px solid rgba(34,170,255,.35);
+      border-radius: 999px;
+      background: rgba(34,170,255,.09);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+
     .admin-row-actions {
       display: flex;
       flex-wrap: wrap;
@@ -3058,9 +3079,9 @@
         </label>
         <label class="full">
           Галерея
-          <textarea name="images" placeholder="Первая строка становится обложкой карточки.&#10;Формат: ссылка-на-картинку | подпись&#10;images/case-01.jpg | Главный визуал&#10;images/case-02.jpg | Мерч и носители"></textarea>
+          <textarea name="images" placeholder="Можно не заполнять, если картинки лежат в папке кейса.&#10;Автоматически ищутся: cover, cover.jpg, 01.jpg, 02.jpg...&#10;Ручной формат: ссылка-на-картинку | подпись"></textarea>
         </label>
-        <p class="admin-hint">Первая строка в галерее становится обложкой карточки. Эта админка работает как локальный редактор и генератор JSON. Чтобы обновить сайт на GitHub Pages, экспортируй JSON и вставь его в файл assets/data/cases.json.</p>
+        <p class="admin-hint">Для нового кейса автоматически создаётся папка вида case-07. Загрузи в неё cover или cover.jpg и изображения 01.jpg, 02.jpg — сайт сам подтянет их после публикации. Также можно вставить ссылки вручную в поле галереи.</p>
         <div class="admin-actions">
           <button class="btn btn-primary" type="submit" id="adminSubmit">Добавить кейс</button>
           <button class="btn btn-secondary" type="button" id="adminCancelEdit">Отменить редактирование</button>
@@ -3433,13 +3454,101 @@
     };
 
     const makeCaseId = (title) => {
-      const slug = String(title || 'case')
-        .toLowerCase()
-        .replace(/ё/g, 'e')
-        .replace(/[^a-zа-я0-9]+/gi, '-')
-        .replace(/^-+|-+$/g, '')
-        .slice(0, 42);
-      return 'custom-' + (slug || 'case') + '-' + Date.now();
+      return makeNextCaseFolderName();
+    };
+
+    const makeNextCaseFolderName = () => {
+      const allCases = { ...defaultCases, ...externalCases, ...getCustomCases() };
+      const usedNumbers = Object.entries(allCases).map(([id, item]) => {
+        const folder = String(getCaseImageFolder(id, item) || '');
+        if (!folder.startsWith('case-')) return 0;
+        const number = Number(folder.slice(5));
+        return Number.isFinite(number) ? number : 0;
+      });
+      const nextNumber = Math.max(0, ...usedNumbers) + 1;
+      return 'case-' + padCaseNumber(nextNumber);
+    };
+
+    const imageExists = (src) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        const timer = window.setTimeout(() => resolve(false), 900);
+        img.onload = () => {
+          window.clearTimeout(timer);
+          resolve(true);
+        };
+        img.onerror = () => {
+          window.clearTimeout(timer);
+          resolve(false);
+        };
+        img.src = src;
+      });
+    };
+
+    const normalizeFolderPath = (folder) => {
+      let safeFolder = String(folder || '').trim();
+      while (safeFolder.startsWith('/')) safeFolder = safeFolder.slice(1);
+      while (safeFolder.endsWith('/')) safeFolder = safeFolder.slice(0, -1);
+      return safeFolder;
+    };
+
+    const getAutoImageSources = (folder, name) => {
+      const safeFolder = normalizeFolderPath(folder);
+      const base = CASES_IMAGE_BASE + safeFolder + '/';
+      if (name === 'cover') {
+        return [base + 'cover', ...AUTO_IMAGE_EXTENSIONS.map((ext) => base + 'cover.' + ext)];
+      }
+      return AUTO_IMAGE_EXTENSIONS.map((ext) => base + name + '.' + ext);
+    };
+
+    const findFirstExistingImage = async (folder, name) => {
+      const sources = getAutoImageSources(folder, name);
+      const checks = await Promise.all(sources.map(async (src) => ({
+        src,
+        exists: await imageExists(src)
+      })));
+      const found = checks.find((item) => item.exists);
+      return found ? found.src : '';
+    };
+
+    const loadImagesFromFolder = async (folder) => {
+      if (!folder) return [];
+      const images = [];
+      const coverSrc = await findFirstExistingImage(folder, 'cover');
+
+      if (coverSrc) {
+        images.push({ src: coverSrc, caption: 'Обложка кейса' });
+      }
+
+      let missesInRow = 0;
+      for (let index = 1; index <= AUTO_IMAGE_LIMIT; index += 1) {
+        const name = padCaseNumber(index);
+        const src = await findFirstExistingImage(folder, name);
+
+        if (src) {
+          images.push({ src, caption: 'Изображение ' + name });
+          missesInRow = 0;
+        } else {
+          missesInRow += 1;
+        }
+
+        if (missesInRow >= 3) break;
+      }
+
+      return images;
+    };
+
+    const hydrateCaseImagesFromFolders = async () => {
+      const entries = Object.entries(cases);
+
+      for (const [id, item] of entries) {
+        const folder = getCaseImageFolder(id, item);
+        const autoImages = await loadImagesFromFolder(folder);
+        if (autoImages.length) {
+          item.imageFolder = folder;
+          item.images = autoImages;
+        }
+      }
     };
 
     const getCaseWorkTag = (item) => item.workTag || item.cardKicker || item.kicker || 'Айдентика';
@@ -3701,8 +3810,9 @@
           ? '<button class="admin-small-btn" type="button" data-reset-case="' + id + '">Вернуть</button>'
           : '<button class="admin-small-btn" type="button" data-delete-case="' + id + '">Удалить</button>';
 
+        const imageFolder = getCaseImageFolder(id, item);
         return '<div class="admin-case-row">' +
-          '<div><strong>' + (item.cardTitle || item.title) + '</strong><span>' + getCaseLabel(item) + ' · приоритет ' + (item.priority ?? 1) + ' · ' + ((item.images || []).length) + ' изображений · ' + state + '</span></div>' +
+          '<div><strong>' + (item.cardTitle || item.title) + '</strong><span>' + getCaseLabel(item) + ' · приоритет ' + (item.priority ?? 1) + ' · ' + ((item.images || []).length) + ' изображений · ' + state + '</span><div class="admin-case-id"><code>ID: ' + id + '</code><code>Папка: assets/img/cases/' + imageFolder + '/</code></div></div>' +
           '<div class="admin-row-actions">' +
             '<button class="admin-small-btn" type="button" data-edit-case="' + id + '">Редактировать</button>' +
             secondaryAction +
@@ -4075,6 +4185,11 @@
           item.classList.add('visible');
         });
       }, 900);
+
+      hydrateCaseImagesFromFolders().then(() => {
+        renderCaseCards();
+        renderAdminList();
+      });
     };
 
     startApp();
@@ -4187,6 +4302,7 @@
       });
 
       customCases[id] = {
+        imageFolder: id,
         cardKicker: data.workTag,
         workTag: data.workTag,
         sphereTag: data.sphereTag,
