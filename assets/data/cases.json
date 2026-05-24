@@ -18,20 +18,20 @@
     ],
     "images": [
       {
-        "src": "",
-        "caption": "Свитшот, значки и сувенирная продукция"
+        "src": "./assets/img/cases/case-01/cover.png",
+        "caption": "Обложка кейса"
       },
       {
-        "src": "",
-        "caption": "Навигация, кружки, ленты и одежда"
+        "src": "./assets/img/cases/case-01/01.png",
+        "caption": "Изображение 01"
       },
       {
-        "src": "",
-        "caption": "Застройка и выставочные носители"
+        "src": "./assets/img/cases/case-01/02.png",
+        "caption": "Изображение 02"
       },
       {
-        "src": "",
-        "caption": "Оформление пространства и рекламные материалы"
+        "src": "./assets/img/cases/case-01/03.png",
+        "caption": "Изображение 03"
       }
     ]
   },
@@ -54,20 +54,20 @@
     ],
     "images": [
       {
-        "src": "",
-        "caption": "Главная графика и логика визуальной системы слёта"
+        "src": "./assets/img/cases/case-02/cover.png",
+        "caption": "Обложка кейса"
       },
       {
-        "src": "",
-        "caption": "Карточки, навигация и информационные материалы"
+        "src": "./assets/img/cases/case-02/01.png",
+        "caption": "Изображение 01"
       },
       {
-        "src": "",
-        "caption": "Баннеры, экраны и оформление площадок"
+        "src": "./assets/img/cases/case-02/02.png",
+        "caption": "Изображение 02"
       },
       {
-        "src": "",
-        "caption": "Паттерны, графические элементы и сувенирка"
+        "src": "./assets/img/cases/case-02/03.png",
+        "caption": "Изображение 03"
       }
     ]
   },
@@ -90,20 +90,16 @@
     ],
     "images": [
       {
-        "src": "",
-        "caption": "Мерч и визуальные носители ДК Куб"
+        "src": "./assets/img/cases/case-03/cover.png",
+        "caption": "Обложка кейса"
       },
       {
-        "src": "",
-        "caption": "Стикеры, пакеты и оформление печатных и цифровых материалов"
+        "src": "./assets/img/cases/case-03/01.png",
+        "caption": "Изображение 01"
       },
       {
-        "src": "",
-        "caption": "Афиши городских и культурных событий"
-      },
-      {
-        "src": "",
-        "caption": "Наружные рекламные форматы"
+        "src": "./assets/img/cases/case-03/02.png",
+        "caption": "Изображение 02"
       }
     ]
   },
@@ -126,20 +122,20 @@
     ],
     "images": [
       {
-        "src": "",
-        "caption": "Стикеры, маскоты и элементы университетского визуала"
+        "src": "./assets/img/cases/case-04/cover.png",
+        "caption": "Обложка кейса"
       },
       {
-        "src": "",
-        "caption": "Информационные и рекламные материалы"
+        "src": "./assets/img/cases/case-04/01.png",
+        "caption": "Изображение 01"
       },
       {
-        "src": "",
-        "caption": "Информационные материалы для абитуриентов"
+        "src": "./assets/img/cases/case-04/02.png",
+        "caption": "Изображение 02"
       },
       {
-        "src": "",
-        "caption": "Серии визуальных материалов и образовательные рубрики"
+        "src": "./assets/img/cases/case-04/03.png",
+        "caption": "Изображение 03"
       }
     ]
   }
