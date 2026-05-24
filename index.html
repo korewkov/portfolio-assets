@@ -1,0 +1,4410 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Александр Корешков — графический дизайнер</title>
+  <meta name="description" content="Портфолио графического дизайнера Александра Корешкова: айдентика, афиши, презентации, полиграфия, мерч и брендинг для событий, университетов и молодёжных проектов." />
+  <meta property="og:title" content="Александр Корешков — графический дизайнер" />
+  <meta property="og:description" content="Айдентика, афиши, презентации, полиграфия, мерч и брендинг для событий, университетов и молодёжных проектов." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./assets/img/common/hero.png" />
+  <link rel="icon" href="./assets/img/common/favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --black: #050505;
+      --white: #f4f4f0;
+      --gray: #9a9a92;
+      --dirty: #1d1d1b;
+      --line: rgba(244, 244, 240, 0.18);
+      --blue: #22aaff;
+      --blue-dark: #0069ff;
+      --scan: rgba(255,255,255,.055);
+      --max: 1240px;
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: #05070b;
+    }
+
+    html::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .16;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.014) 1px, transparent 1px),
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.045) 1px, transparent 0);
+      background-size:
+        100% 34px,
+        34px 100%,
+        22px 22px;
+      mix-blend-mode: soft-light;
+    }
+
+    body {
+      min-height: 100vh;
+      position: relative;
+      background: linear-gradient(180deg, #05070b 0%, #07101a 48%, #05070b 100%);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -18%;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform, opacity;
+    }
+
+    body::before {
+      background:
+        radial-gradient(42% 34% at 18% 22%, rgba(34,170,255,.18), transparent 72%),
+        radial-gradient(34% 30% at 78% 18%, rgba(125,205,255,.09), transparent 74%),
+        radial-gradient(46% 38% at 52% 80%, rgba(255,255,255,.045), transparent 78%);
+      filter: blur(42px);
+      animation: waveDriftA 24s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      background:
+        radial-gradient(38% 32% at 72% 30%, rgba(45,120,255,.12), transparent 72%),
+        radial-gradient(30% 26% at 24% 74%, rgba(85,180,255,.08), transparent 76%),
+        radial-gradient(34% 28% at 84% 84%, rgba(255,255,255,.035), transparent 78%);
+      filter: blur(58px);
+      opacity: .95;
+      animation: waveDriftB 31s ease-in-out infinite alternate;
+    }
+
+    @keyframes waveDriftA {
+      0% { transform: translate3d(-2%, -1%, 0) scale(1); }
+      50% { transform: translate3d(2%, 1.5%, 0) scale(1.04); }
+      100% { transform: translate3d(-1%, 2%, 0) scale(1.02); }
+    }
+
+    @keyframes waveDriftB {
+      0% { transform: translate3d(1%, -2%, 0) scale(1.02); }
+      50% { transform: translate3d(-2%, 2%, 0) scale(1.05); }
+      100% { transform: translate3d(2%, 1%, 0) scale(1.01); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before,
+      body::after,
+      .marquee-track,
+      .about-info-card::after,
+      .about-timeline-card::after,
+      .about-contact-card::after {
+        animation: none;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      background: rgba(5,5,5,.74);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      transition: .22s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-2px) rotate(-1deg);
+    }
+
+    .logo-img {
+      display: block;
+      width: clamp(190px, 18vw, 280px);
+      height: auto;
+      max-height: 46px;
+      object-fit: contain;
+    }
+
+    .logo-img.is-hidden {
+      display: none;
+    }
+
+    .logo-fallback {
+      display: none;
+      color: var(--white);
+      font-size: clamp(22px, 2vw, 30px);
+      font-weight: 950;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+    }
+
+    .logo-fallback.is-visible {
+      display: inline-flex;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 9px 12px;
+      border: 1px solid transparent;
+      color: rgba(244,244,240,.76);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      transition: .25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      border-color: var(--blue);
+      background: rgba(34,170,255,.12);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+      padding: 72px 0 48px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 2px;
+      background: var(--blue);
+      box-shadow: 0 0 24px var(--blue);
+    }
+
+    h1 {
+      max-width: 980px;
+      font-size: clamp(58px, 10vw, 152px);
+      line-height: .82;
+      letter-spacing: -.095em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .hero h1 span {
+      display: inline-block;
+      color: var(--blue);
+      text-shadow: 4px 4px 0 var(--white), 8px 8px 0 rgba(34,170,255,.22);
+      transform: rotate(-2deg);
+    }
+
+    .hero-text {
+      margin-top: 28px;
+      max-width: 680px;
+      color: rgba(244,244,240,.76);
+      font-size: clamp(18px, 2vw, 25px);
+      line-height: 1.25;
+      letter-spacing: -.02em;
+    }
+
+    .hero-actions {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border: 2px solid var(--white);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      transition: .25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--black);
+      box-shadow: 6px 6px 0 var(--white);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      box-shadow: 6px 6px 0 rgba(34,170,255,.6);
+    }
+
+    .btn:hover {
+      transform: translate(-3px, -3px) rotate(-1deg);
+      box-shadow: 10px 10px 0 var(--white);
+    }
+
+    .hero-poster {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(244,244,240,.12), transparent),
+        repeating-linear-gradient(-12deg, rgba(255,255,255,.05) 0 1px, transparent 1px 16px),
+        #10100f;
+      overflow: visible;
+      box-shadow: 0 30px 90px rgba(0,0,0,.45);
+      transform: rotate(1.6deg);
+      isolation: isolate;
+    }
+
+    .hero-poster::before {
+      content: "DESIGN / PRINT / IDENTITY / 2026";
+      position: absolute;
+      z-index: 1;
+      inset: 24px;
+      border: 2px dashed rgba(244,244,240,.25);
+      border-radius: 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 18px;
+      color: rgba(244,244,240,.35);
+      font-size: 12px;
+      letter-spacing: .14em;
+    }
+
+    .hero-photo {
+      position: absolute;
+      right: -34px;
+      bottom: -66px;
+      z-index: 7;
+      width: min(108%, 650px);
+      pointer-events: none;
+      filter:
+        drop-shadow(-18px 22px 0 rgba(34,170,255,.2))
+        drop-shadow(0 34px 58px rgba(0,0,0,.52));
+      transform: rotate(-2deg);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .hero-photo::before {
+      content: "";
+      position: absolute;
+      inset: 14% 8% 0 10%;
+      z-index: -1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34,170,255,.32), transparent 66%);
+      filter: blur(18px);
+    }
+
+    .poster-big {
+      position: absolute;
+      z-index: 3;
+      left: -12px;
+      bottom: 42px;
+      font-size: clamp(86px, 11vw, 142px);
+      line-height: .78;
+      font-weight: 950;
+      letter-spacing: -.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      transform: rotate(-4deg);
+    }
+
+    .poster-big em {
+      display: block;
+      font-style: normal;
+      color: var(--blue);
+      -webkit-text-stroke: 2px var(--white);
+    }
+
+    .hero-blobs {
+      position: absolute;
+      inset: 0;
+      z-index: 12;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .hero * {
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .hero-blob {
+      position: absolute;
+      left: 0;
+      top: 0;
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 17px;
+      border: 2px solid var(--black);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      box-shadow: 7px 7px 0 var(--blue);
+      transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+      will-change: transform;
+      pointer-events: auto;
+      cursor: grab;
+      touch-action: none;
+      transition: box-shadow .18s ease, background .18s ease, color .18s ease;
+    }
+
+
+    .hero-blob:nth-child(3n) {
+      border-radius: 18px;
+    }
+
+    .hero-blob.is-near {
+      box-shadow: 10px 10px 0 var(--white);
+      background: var(--blue);
+      color: var(--black);
+    }
+
+    .hero-blob.is-dragging {
+      cursor: grabbing;
+      box-shadow: 12px 12px 0 var(--white);
+      background: var(--blue);
+      color: var(--black);
+      z-index: 20;
+    }
+
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      border-block: 1px solid var(--line);
+      background: var(--blue);
+      color: var(--black);
+      margin: 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 19s linear infinite;
+      transition: animation-duration .35s ease;
+    }
+
+    .marquee:hover .marquee-track {
+      animation-duration: 38s;
+    }
+
+    .marquee span {
+      padding: 16px 22px;
+      font-size: clamp(20px, 3vw, 44px);
+      line-height: .9;
+      font-weight: 950;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      to { transform: translateX(-50%); }
+    }
+
+    section {
+      padding: 88px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: 32px;
+      align-items: end;
+      margin-bottom: 38px;
+    }
+
+    .label {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      background: rgba(255,255,255,.03);
+    }
+
+    h2 {
+      margin-top: 18px;
+      font-size: clamp(40px, 6vw, 92px);
+      line-height: .86;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .section-copy {
+      color: rgba(244,244,240,.68);
+      font-size: clamp(17px, 1.6vw, 22px);
+      line-height: 1.35;
+      letter-spacing: -.02em;
+    }
+
+    .about-section {
+      position: relative;
+      padding-top: 88px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .about-photo-card,
+    .about-info-card,
+    .about-timeline-card,
+    .about-contact-card {
+      position: relative;
+      border: 1px solid rgba(244,244,240,.14);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 86% 10%, rgba(34,170,255,.13), transparent 30%),
+        linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.018) 100%);
+      overflow: hidden;
+    }
+
+    .about-photo-card {
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 18px;
+    }
+
+    .about-photo-card:hover .about-portrait {
+      object-position: 54% 50%;
+      transform: scale(1.045);
+      filter: saturate(1) contrast(1.1);
+    }
+
+    .about-photo-card::before,
+    .about-info-card::before,
+    .about-timeline-card::before,
+    .about-contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px);
+      background-size: 100% 40px;
+      opacity: .16;
+      pointer-events: none;
+    }
+
+    .about-info-card::after,
+    .about-timeline-card::after,
+    .about-contact-card::after {
+      content: "";
+      position: absolute;
+      left: -20%;
+      right: -20%;
+      top: -2px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(34,170,255,.9), transparent);
+      opacity: .72;
+      transform: translateY(-12px);
+      animation: aboutScan 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .about-timeline-card::after { animation-delay: 1.2s; }
+    .about-contact-card::after { animation-delay: 2.1s; }
+
+    @keyframes aboutScan {
+      0%, 22% { transform: translateY(-16px); opacity: 0; }
+      35% { opacity: .75; }
+      62% { transform: translateY(460px); opacity: .32; }
+      100% { transform: translateY(460px); opacity: 0; }
+    }
+
+    .about-portrait {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: .88;
+      filter: saturate(.92) contrast(1.08);
+      transition: transform .55s ease, object-position .55s ease, filter .55s ease;
+    }
+
+    .about-photo-card::after {
+      content: "Александр Корешков";
+      position: relative;
+      z-index: 2;
+      width: fit-content;
+      padding: 10px 14px;
+      border: 2px solid var(--black);
+      background: var(--white);
+      color: var(--black);
+      box-shadow: 7px 7px 0 var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      transform: rotate(-3deg);
+    }
+
+    .about-right {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+    }
+
+    .about-info-card,
+    .about-timeline-card,
+    .about-contact-card {
+      padding: clamp(20px, 3vw, 32px);
+    }
+
+    .about-info-card {
+      grid-column: 1 / -1;
+    }
+
+    .about-info-card h2 {
+      margin-top: 12px;
+      font-size: clamp(44px, 6vw, 86px);
+    }
+
+    .about-lead {
+      max-width: 920px;
+      margin-top: 18px;
+      color: rgba(244,244,240,.76);
+      font-size: clamp(18px, 1.7vw, 24px);
+      line-height: 1.28;
+      letter-spacing: -.025em;
+    }
+
+    .about-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .about-facts span {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 14px;
+      border: 1px solid rgba(244,244,240,.16);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      transition: transform .22s ease, background .22s ease, color .22s ease;
+    }
+
+    .about-facts span:hover {
+      transform: translateY(-4px) rotate(-2deg);
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .about-facts span:nth-child(2n) {
+      color: var(--black);
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .about-mini-title {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 16px;
+    }
+
+    .timeline-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(244,244,240,.12);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .timeline-date {
+      color: rgba(244,244,240,.48);
+      font-size: 11px;
+      font-weight: 950;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .timeline-role {
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -.025em;
+    }
+
+    .timeline-place {
+      margin-top: 5px;
+      color: rgba(244,244,240,.52);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .about-contact-card {
+      display: grid;
+      align-content: space-between;
+      gap: 22px;
+    }
+
+    .about-contact-card h3 {
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: .92;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 8px;
+      justify-items: start;
+    }
+
+    .contact-links a,
+    .contact-links span {
+      color: rgba(244,244,240,.78);
+      font-size: clamp(16px, 1.7vw, 21px);
+      line-height: 1.08;
+      letter-spacing: -.03em;
+    }
+
+    .contact-links a:hover {
+      color: var(--blue);
+    }
+
+    .services-section {
+      position: relative;
+    }
+
+    .services-head {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 36px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    .services-title-xl {
+      margin: 14px 0 0;
+      font-size: clamp(54px, 8vw, 116px);
+      line-height: .9;
+      letter-spacing: -.06em;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .services-head-copy {
+      display: grid;
+      gap: 20px;
+    }
+
+    .services-lead {
+      max-width: 760px;
+      margin: 0;
+      color: rgba(244,244,240,.76);
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+
+    .services-quick-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .services-quick-tags span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 16px;
+      border: 1px solid rgba(244,244,240,.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .services-showcase {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+      min-height: 260px;
+      grid-column: span 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px;
+      border: 1px solid rgba(244,244,240,.14);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 86% 10%, rgba(34,170,255,.12), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.018) 100%);
+      overflow: hidden;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px);
+      background-size: 100% 40px;
+      opacity: .16;
+      pointer-events: none;
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      right: -48px;
+      top: -48px;
+      border: 1px solid rgba(244,244,240,.14);
+      border-radius: 50%;
+      pointer-events: none;
+      transition: transform .35s ease, border-color .35s ease, opacity .35s ease;
+    }
+
+    .service-card:hover::after {
+      transform: scale(1.18) translate(-10px, 10px);
+      border-color: rgba(34,170,255,.5);
+      opacity: .9;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(34,170,255,.5);
+      box-shadow: 8px 8px 0 rgba(34,170,255,.32);
+    }
+
+    .service-card-main {
+      grid-column: span 5;
+      min-height: 360px;
+    }
+
+    .service-card-wide {
+      grid-column: span 7;
+      min-height: 360px;
+    }
+
+    .service-card-accent {
+      background:
+        radial-gradient(circle at 86% 10%, rgba(34,170,255,.2), transparent 28%),
+        linear-gradient(180deg, rgba(34,170,255,.08) 0%, rgba(255,255,255,.025) 100%);
+    }
+
+    .service-card-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .service-index {
+      display: inline-block;
+      transition: transform .28s ease;
+      color: var(--blue);
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+
+    .service-type {
+      color: rgba(244,244,240,.52);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      text-align: right;
+    }
+
+    .service-card:hover .service-index {
+      transform: translateX(8px) rotate(-6deg) scale(1.08);
+    }
+
+    .service-card:hover .service-points span {
+      transform: translateY(-3px);
+      border-color: rgba(34,170,255,.38);
+    }
+
+    .service-points span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border: 1px solid rgba(244,244,240,.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      white-space: nowrap;
+      transition: transform .24s ease, border-color .24s ease;
+    }
+
+    .service-points span:nth-child(2) { transition-delay: .035s; }
+    .service-points span:nth-child(3) { transition-delay: .07s; }
+    .service-points span:nth-child(4) { transition-delay: .105s; }
+
+    .cases-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      overflow: hidden;
+      transition: height .5s cubic-bezier(.22, 1, .36, 1);
+      will-change: height;
+    }
+
+    .case-card.case-enter {
+      animation: caseSoftIn .42s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    @keyframes caseSoftIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .cases-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 28px;
+    }
+
+    .case-controls {
+      position: relative;
+      z-index: 80;
+      overflow: visible;
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) minmax(210px, 280px) minmax(210px, 280px);
+      gap: 14px;
+      align-items: start;
+      margin-bottom: 24px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .case-search {
+      width: 100%;
+      min-height: 52px;
+      border: 1px solid rgba(244,244,240,.22);
+      border-radius: 999px;
+      background: rgba(5,5,5,.68);
+      color: var(--white);
+      padding: 0 18px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      outline: none;
+      transition: .22s ease;
+    }
+
+    .case-search:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(34,170,255,.16);
+    }
+
+    .custom-select {
+      position: relative;
+      z-index: 90;
+    }
+
+    .custom-select.is-open {
+      z-index: 160;
+    }
+
+    .custom-select-trigger {
+      width: 100%;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid rgba(244,244,240,.22);
+      border-radius: 999px;
+      background: rgba(5,5,5,.68);
+      color: var(--white);
+      padding: 0 20px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      cursor: pointer;
+      outline: none;
+      transition: .22s ease;
+    }
+
+    .custom-select-trigger:hover,
+    .custom-select.is-open .custom-select-trigger {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(34,170,255,.16);
+    }
+
+    .custom-select-arrow {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      transition: .22s ease;
+    }
+
+    .custom-select.is-open .custom-select-arrow {
+      transform: rotate(180deg);
+    }
+
+    .custom-select-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 10px);
+      display: none;
+      padding: 10px;
+      border: 1px solid rgba(244,244,240,.32);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 88% 10%, rgba(34,170,255,.24), transparent 34%),
+        linear-gradient(180deg, #151515 0%, #080808 100%);
+      backdrop-filter: none;
+      box-shadow: 0 28px 90px rgba(0,0,0,.75), 8px 8px 0 rgba(34,170,255,.55);
+      isolation: isolate;
+      pointer-events: auto;
+    }
+
+    .custom-select.is-open .custom-select-menu {
+      display: grid;
+      gap: 4px;
+    }
+
+    .custom-select-option {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      background: transparent;
+      color: rgba(244,244,240,.72);
+      text-align: left;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .075em;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .custom-select-option:hover,
+    .custom-select-option.is-active {
+      background: var(--blue);
+      color: var(--black);
+      border-color: var(--blue);
+      transform: translateX(3px);
+    }
+
+    .case-results-note {
+      margin: -4px 0 18px;
+      color: rgba(244,244,240,.52);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .case-empty {
+      grid-column: 1 / -1;
+      padding: 34px;
+      border: 1px dashed rgba(244,244,240,.24);
+      border-radius: 24px;
+      color: rgba(244,244,240,.62);
+      font-size: clamp(24px, 4vw, 52px);
+      line-height: .95;
+      font-weight: 950;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+
+    .case-card {
+      min-height: 420px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 82% 18%, rgba(34,170,255,.22), transparent 30%),
+        linear-gradient(135deg, rgba(244,244,240,.10), rgba(244,244,240,.02));
+      overflow: hidden;
+      transition: .32s ease;
+    }
+
+    .case-card { grid-column: span 6; }
+    .case-card:nth-child(1) { grid-column: span 7; }
+    .case-card:nth-child(2) { grid-column: span 5; }
+    .case-card:nth-child(3) { grid-column: span 5; }
+    .case-card:nth-child(4) { grid-column: span 7; }
+    .case-card:nth-child(5) { grid-column: span 6; }
+    .case-card:nth-child(6) { grid-column: span 6; }
+
+    .case-card::before {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -80px;
+      top: -80px;
+      z-index: 2;
+      border: 2px solid rgba(244,244,240,.16);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .case-cover {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      min-height: 210px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(34,170,255,.25), transparent 36%),
+        linear-gradient(135deg, rgba(244,244,240,.08), rgba(244,244,240,.02));
+      border-bottom: 1px solid rgba(244,244,240,.13);
+    }
+
+    .case-cover img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(.9) contrast(1.06);
+      transform: scale(1.01);
+      transition: transform .45s ease, filter .45s ease;
+    }
+
+    .case-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(5,5,5,.04) 0%, rgba(5,5,5,.42) 100%),
+        radial-gradient(circle at 82% 18%, rgba(34,170,255,.18), transparent 34%);
+      pointer-events: none;
+    }
+
+    .case-cover-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: rgba(244,244,240,.38);
+      font-size: clamp(34px, 5vw, 74px);
+      line-height: .85;
+      font-weight: 950;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+    }
+
+    .case-body {
+      position: relative;
+      z-index: 3;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 22px 24px;
+    }
+
+    .case-card::after {
+      content: "OPEN CASE";
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      z-index: 5;
+      padding: 9px 12px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      transform: rotate(-3deg);
+      opacity: 0;
+      transition: .25s ease;
+    }
+
+    .case-top {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: rgba(244,244,240,.5);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .case-title {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin-top: 30px;
+      font-size: clamp(34px, 4.4vw, 68px);
+      line-height: .87;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+    }
+
+    .case-title span {
+      color: var(--blue);
+    }
+
+    .case-desc {
+      max-width: 560px;
+      margin-top: 18px;
+      color: rgba(244,244,240,.67);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .case-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-8px);
+      box-shadow: 0 26px 70px rgba(0,0,0,.42);
+    }
+
+    .case-card:hover .case-cover img {
+      transform: scale(1.07) rotate(.6deg);
+      filter: saturate(1.05) contrast(1.1);
+    }
+
+    .case-card:hover::after {
+      opacity: 1;
+      transform: rotate(-3deg) translateY(-8px);
+    }
+
+    .process-section {
+      position: relative;
+    }
+
+    .process-head {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .process-title-xl {
+      margin: 14px 0 0;
+      font-size: clamp(54px, 8vw, 118px);
+      line-height: .9;
+      letter-spacing: -.06em;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .process-lead {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.28;
+      color: rgba(244,244,240,.74);
+      letter-spacing: -.025em;
+    }
+
+    .process-line {
+      position: relative;
+      height: 2px;
+      margin-bottom: 30px;
+      background: rgba(244,244,240,.09);
+      overflow: hidden;
+    }
+
+    .process-line::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: var(--process-progress, 0%);
+      background: linear-gradient(90deg, rgba(34,170,255,.15), rgba(34,170,255,.95), rgba(244,244,240,.7));
+      box-shadow: 0 0 24px rgba(34,170,255,.45);
+      transition: width .2s ease;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+      counter-reset: work;
+    }
+
+    .work-step {
+      position: relative;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px;
+      border: 1px solid rgba(244,244,240,.14);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 86% 10%, rgba(34,170,255,.14), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,.045) 0%, rgba(255,255,255,.018) 100%);
+      overflow: hidden;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+      counter-increment: work;
+    }
+
+    .work-step::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 100% 42px;
+      opacity: .22;
+      pointer-events: none;
+    }
+
+    .work-step::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      right: -62px;
+      top: -62px;
+      border: 1px solid rgba(244,244,240,.15);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .work-step:nth-child(2),
+    .work-step:nth-child(4) {
+      transform: translateY(18px);
+    }
+
+    .work-step:hover {
+      transform: translateY(-8px);
+      border-color: rgba(34,170,255,.55);
+      box-shadow: 8px 8px 0 rgba(34,170,255,.34);
+    }
+
+    .work-step:nth-child(2):hover,
+    .work-step:nth-child(4):hover {
+      transform: translateY(10px);
+    }
+
+    .process-card-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 26px;
+    }
+
+    .process-step-num {
+      color: var(--blue);
+      font-size: 34px;
+      font-weight: 950;
+      letter-spacing: -.04em;
+      line-height: 1;
+    }
+
+    .process-step-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 18px rgba(34,170,255,.65);
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .work-step.is-active {
+      border-color: rgba(34,170,255,.52);
+      background:
+        radial-gradient(circle at 86% 10%, rgba(34,170,255,.22), transparent 28%),
+        linear-gradient(180deg, rgba(34,170,255,.055) 0%, rgba(255,255,255,.02) 100%);
+    }
+
+    .work-step.is-active .process-step-dot {
+      transform: scale(1.45);
+      box-shadow: 0 0 28px rgba(34,170,255,.9);
+    }
+
+    .work-step h3 {
+      position: relative;
+      z-index: 1;
+      max-width: 95%;
+      margin: 0 0 14px;
+      font-size: clamp(30px, 3vw, 54px);
+      line-height: .95;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+      font-weight: 950;
+    }
+
+    .work-step p {
+      position: relative;
+      z-index: 1;
+      max-width: 95%;
+      margin: 0;
+      color: rgba(244,244,240,.68);
+      font-size: clamp(16px, 1.35vw, 20px);
+      line-height: 1.42;
+      letter-spacing: -.015em;
+    }
+
+    .process-card-result {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 7px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(244,244,240,.1);
+    }
+
+    .process-card-result span {
+      color: rgba(34,170,255,.9);
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    .process-card-result strong {
+      color: var(--white);
+      font-size: 20px;
+      line-height: 1.1;
+      font-weight: 850;
+      letter-spacing: -.025em;
+    }
+
+    .cta {
+      padding: 110px 0 54px;
+      border-bottom: 0;
+    }
+
+    .cta-box {
+      position: relative;
+      padding: clamp(28px, 6vw, 72px);
+      border: 2px solid var(--white);
+      border-radius: 32px;
+      background:
+        linear-gradient(135deg, rgba(34,170,255,.2), rgba(244,244,240,.04)),
+        #070707;
+      overflow: hidden;
+      box-shadow: 16px 16px 0 var(--blue);
+    }
+
+    .cta-box::before {
+      content: "SEND BRIEF / MAKE IT LOUD / GRAPHIC DESIGN";
+      position: absolute;
+      left: -18px;
+      top: 22px;
+      width: 110%;
+      padding: 10px 0;
+      background: var(--white);
+      color: var(--black);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-align: center;
+      transform: rotate(-2.5deg);
+    }
+
+    .cta-box::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 4px;
+      width: var(--brief-progress, 0%);
+      background: var(--blue);
+      box-shadow: 0 0 28px rgba(34,170,255,.7);
+      transition: width .24s ease;
+    }
+
+    .cta-box.is-complete {
+      box-shadow: 16px 16px 0 var(--white), 0 0 80px rgba(34,170,255,.18);
+    }
+
+    .cta h2 {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin-top: 50px;
+      font-size: clamp(48px, 8vw, 122px);
+    }
+
+    .cta p {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin-top: 24px;
+      color: rgba(244,244,240,.74);
+      font-size: clamp(18px, 2vw, 25px);
+      line-height: 1.3;
+      letter-spacing: -.02em;
+    }
+
+    .cta .cta-note {
+      max-width: 580px;
+      margin-top: 12px;
+      color: rgba(244,244,240,.58);
+      font-size: clamp(14px, 1.2vw, 17px);
+      line-height: 1.35;
+    }
+
+    .cta .btn {
+      position: relative;
+      z-index: 1;
+      margin-top: 34px;
+    }
+
+    .footer {
+      padding: 34px 0 48px;
+      color: rgba(244,244,240,.45);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .section-head,
+      .about-grid,
+      .services-head,
+      .process-head {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-poster {
+        min-height: 430px;
+        transform: rotate(0);
+      }
+
+      .hero-photo {
+        width: min(96%, 520px);
+        right: -22px;
+        bottom: -34px;
+      }
+
+      .hero-blobs {
+        inset: -20px;
+      }
+
+      .hero-blob {
+        min-height: 36px;
+        padding: 0 13px;
+        font-size: 10px;
+      }
+
+      .work-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .services-showcase {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .service-card,
+      .service-card-main,
+      .service-card-wide,
+      .service-card-accent {
+        grid-column: span 1;
+        min-height: 300px;
+      }
+
+      .about-photo-card {
+        min-height: 460px;
+      }
+
+      .about-right,
+      .about-contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .work-step:nth-child(2),
+      .work-step:nth-child(4),
+      .work-step:nth-child(2):hover,
+      .work-step:nth-child(4):hover {
+        transform: translateY(0);
+      }
+
+      .work-step:hover {
+        transform: translateY(-8px);
+      }
+
+      .case-card:nth-child(n) {
+        grid-column: span 12;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .hero-blobs {
+        display: none;
+      }
+
+      .case-controls {
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+
+      .container {
+        width: min(100% - 22px, var(--max));
+      }
+
+      .nav-inner {
+        height: auto;
+        min-height: 66px;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .nav-links a {
+        padding: 7px 0;
+        margin-right: 12px;
+        font-size: 11px;
+      }
+
+      .logo-img {
+        width: min(220px, 62vw);
+        max-height: 42px;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      h1 {
+        font-size: clamp(54px, 18vw, 88px);
+      }
+
+      .hero h1 span {
+        text-shadow: 2px 2px 0 var(--white), 5px 5px 0 rgba(34,170,255,.26);
+      }
+
+      .hero-poster {
+        min-height: 360px;
+        margin-top: 18px;
+        overflow: hidden;
+      }
+
+      .hero-photo {
+        width: min(88%, 330px);
+        right: 50%;
+        bottom: -10px;
+        transform: translateX(50%) rotate(-1deg);
+      }
+
+      .hero-blobs {
+        inset: -12px;
+      }
+
+      .hero-blob {
+        min-height: 32px;
+        padding: 0 10px;
+        font-size: 9px;
+        box-shadow: 4px 4px 0 var(--blue);
+      }
+
+      .poster-big {
+        font-size: 82px;
+      }
+
+      .circle-note {
+        width: 88px;
+        height: 88px;
+        font-size: 9px;
+      }
+
+      section {
+        padding: 68px 0;
+      }
+
+      .services-showcase,
+      .about-right,
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .about-photo-card {
+        min-height: 420px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .service-card,
+      .service-card-main,
+      .service-card-wide,
+      .service-card-accent {
+        min-height: 260px;
+      }
+
+      .services-title-xl {
+        font-size: clamp(48px, 16vw, 82px);
+      }
+
+      .services-lead {
+        font-size: 18px;
+      }
+
+      .work-step {
+        min-height: 320px;
+      }
+
+      .process-title-xl {
+        font-size: clamp(48px, 16vw, 82px);
+      }
+
+      .process-lead {
+        font-size: 18px;
+      }
+
+      .case-card {
+        min-height: 360px;
+      }
+
+      .case-cover {
+        min-height: 170px;
+      }
+
+      .case-title {
+        margin-top: 28px;
+      }
+
+      .cta-box {
+        box-shadow: 8px 8px 0 var(--blue);
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  
+
+    .mobile-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: var(--white);
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .case-card,
+    .service-card,
+    .work-step,
+    .btn,
+    .logo,
+    .logo-img {
+      user-select: none;
+    }
+
+    .case-card {
+      cursor: pointer;
+    }
+
+    .brief-form {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 30px;
+      max-width: 760px;
+    }
+
+    .brief-form label {
+      display: grid;
+      gap: 7px;
+      color: rgba(244,244,240,.62);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .brief-form label.full {
+      grid-column: 1 / -1;
+    }
+
+    .brief-form input,
+    .brief-form textarea,
+    .brief-form select {
+      width: 100%;
+      border: 1px solid rgba(244,244,240,.22);
+      border-radius: 16px;
+      background: rgba(5,5,5,.7);
+      color: var(--white);
+      padding: 15px 16px;
+      font: inherit;
+      outline: none;
+      transition: .22s ease;
+    }
+
+    .brief-form textarea {
+      min-height: 116px;
+      resize: vertical;
+    }
+
+    .brief-form input:focus,
+    .brief-form textarea:focus,
+    .brief-form select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(34,170,255,.16);
+    }
+
+    .brief-form input.is-filled,
+    .brief-form textarea.is-filled,
+    .brief-form select.is-filled {
+      border-color: rgba(34,170,255,.48);
+      background: rgba(34,170,255,.055);
+    }
+
+    .brief-form .btn {
+      width: fit-content;
+      margin-top: 4px;
+      background: var(--blue);
+      color: var(--black);
+      box-shadow: 6px 6px 0 var(--white);
+    }
+
+
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(14px);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-card {
+      position: relative;
+      width: min(780px, 100%);
+      max-height: min(760px, 88vh);
+      overflow: auto;
+      border: 2px solid var(--white);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(34,170,255,.28), transparent 34%),
+        #080808;
+      box-shadow: 14px 14px 0 var(--blue);
+      padding: clamp(24px, 4vw, 48px);
+      animation: modalIn .22s ease both;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(18px) rotate(-1deg) scale(.98); }
+      to { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--black);
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      transition: .22s ease;
+    }
+
+    .modal-close:hover {
+      transform: rotate(8deg) scale(1.06);
+      background: var(--blue);
+    }
+
+    .modal-kicker {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+    }
+
+    .modal-title {
+      margin-top: 18px;
+      max-width: 680px;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: .88;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+    }
+
+    .modal-text {
+      margin-top: 22px;
+      color: rgba(244,244,240,.72);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .case-gallery {
+      margin-top: 28px;
+      border: 1px solid rgba(244,244,240,.18);
+      border-radius: 24px;
+      background: rgba(255,255,255,.035);
+      overflow: hidden;
+    }
+
+    .gallery-main {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(34,170,255,.2), transparent 34%),
+        repeating-linear-gradient(-12deg, rgba(255,255,255,.045) 0 1px, transparent 1px 14px),
+        #111;
+    }
+
+    .gallery-main img {
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      text-align: center;
+      color: rgba(244,244,240,.62);
+      font-size: clamp(24px, 4vw, 54px);
+      line-height: .9;
+      font-weight: 950;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+    }
+
+    .gallery-placeholder span {
+      display: block;
+      max-width: 560px;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      padding: 16px;
+    }
+
+    .gallery-btn {
+      width: 46px;
+      height: 46px;
+      border: 2px solid var(--white);
+      border-radius: 999px;
+      background: rgba(5,5,5,.72);
+      color: var(--white);
+      font-size: 24px;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: .22s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .gallery-btn:hover {
+      background: var(--blue);
+      color: var(--black);
+      transform: scale(1.08) rotate(-3deg);
+    }
+
+    .gallery-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 16px;
+      border-top: 1px solid rgba(244,244,240,.13);
+      color: rgba(244,244,240,.62);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .gallery-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid rgba(244,244,240,.13);
+    }
+
+    .gallery-thumb {
+      aspect-ratio: 16 / 10;
+      min-height: 0;
+      border: 1px solid rgba(244,244,240,.2);
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(34,170,255,.28), rgba(255,255,255,.06)),
+        #151515;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: .58;
+      transition: .22s ease;
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .gallery-thumb.is-active,
+    .gallery-thumb:hover {
+      opacity: 1;
+      border-color: var(--blue);
+      transform: translateY(-3px);
+    }
+
+    .modal-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 28px;
+      list-style: none;
+      counter-reset: result;
+    }
+
+    .modal-list::before {
+      content: "Ключевые результаты";
+      grid-column: 1 / -1;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+    }
+
+    .modal-list li {
+      position: relative;
+      min-height: 128px;
+      display: flex;
+      align-items: flex-end;
+      padding: 48px 18px 18px;
+      border: 1px solid rgba(244,244,240,.18);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(34,170,255,.2), transparent 34%),
+        rgba(255,255,255,.04);
+      color: rgba(244,244,240,.86);
+      font-size: clamp(16px, 1.65vw, 21px);
+      line-height: 1.12;
+      letter-spacing: -.035em;
+      overflow: hidden;
+      counter-increment: result;
+      transition: .24s ease;
+    }
+
+    .modal-list li::before {
+      content: "0" counter(result);
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: .12em;
+    }
+
+    .modal-list li::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      right: -48px;
+      top: -48px;
+      border: 1px solid rgba(244,244,240,.16);
+      border-radius: 50%;
+    }
+
+    .modal-list li:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue);
+      background: var(--blue);
+      color: var(--black);
+      box-shadow: 8px 8px 0 var(--white);
+    }
+
+    .modal-list li:hover::before {
+      color: var(--black);
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 260;
+      max-width: 360px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 8px 8px 0 var(--blue);
+      opacity: 0;
+      transform: translateY(14px);
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .admin-fab {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 150;
+      width: 48px;
+      height: 48px;
+      display: none;
+      place-items: center;
+      border: 2px solid var(--white);
+      border-radius: 50%;
+      background: var(--black);
+      color: var(--white);
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 var(--blue);
+      transition: .22s ease;
+    }
+
+    .admin-fab.is-visible {
+      display: grid;
+    }
+
+    .admin-fab:hover {
+      transform: translate(-3px, -3px) rotate(-6deg);
+      background: var(--blue);
+      color: var(--black);
+      box-shadow: 10px 10px 0 var(--white);
+    }
+
+    .admin-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 240;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(14px);
+    }
+
+    .admin-panel.open {
+      display: flex;
+    }
+
+    .admin-card {
+      position: relative;
+      width: min(1040px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border: 2px solid var(--white);
+      border-radius: 28px;
+      background: radial-gradient(circle at 100% 0%, rgba(34,170,255,.2), transparent 34%), #080808;
+      box-shadow: 14px 14px 0 var(--blue);
+      padding: clamp(22px, 4vw, 42px);
+    }
+
+    .admin-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .admin-head h3 {
+      max-width: 700px;
+      font-size: clamp(38px, 6vw, 78px);
+      line-height: .86;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+    }
+
+    .admin-head p {
+      max-width: 620px;
+      margin-top: 12px;
+      color: rgba(244,244,240,.62);
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .admin-close {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--black);
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .admin-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .admin-form label {
+      display: grid;
+      gap: 7px;
+      color: rgba(244,244,240,.62);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .admin-form label.full {
+      grid-column: 1 / -1;
+    }
+
+    .admin-form input,
+    .admin-form textarea,
+    .admin-form select {
+      width: 100%;
+      border: 1px solid rgba(244,244,240,.22);
+      border-radius: 16px;
+      background: rgba(5,5,5,.7);
+      color: var(--white);
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+    }
+
+    .admin-form textarea {
+      min-height: 108px;
+      resize: vertical;
+    }
+
+    .admin-form input:focus,
+    .admin-form textarea:focus,
+    .admin-form select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(34,170,255,.16);
+    }
+
+    .admin-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .admin-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .admin-list-title {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .admin-case-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 14px;
+      border: 1px solid rgba(244,244,240,.14);
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+    }
+
+    .admin-case-row strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .admin-case-row span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(244,244,240,.5);
+      font-size: 12px;
+    }
+
+    .admin-row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .admin-small-btn {
+      min-height: 38px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .admin-small-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .admin-hint {
+      grid-column: 1 / -1;
+      color: rgba(244,244,240,.46);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 680px) {
+      .modal-list {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-form {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-card {
+        box-shadow: 8px 8px 0 var(--blue);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .mobile-toggle {
+        display: grid;
+        place-items: center;
+        position: absolute;
+        right: 0;
+        top: 12px;
+      }
+
+      .nav-inner {
+        position: relative;
+        padding-right: 54px;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        padding-top: 10px;
+      }
+
+      .nav-links.open {
+        display: grid;
+      }
+
+      .brief-form {
+        grid-template-columns: 1fr;
+      }
+
+      .brief-form .btn {
+        width: 100%;
+      }
+
+      .modal-card {
+        box-shadow: 8px 8px 0 var(--blue);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="container nav-inner">
+        <a href="#top" class="logo" aria-label="На главную">
+          <img
+            class="logo-img"
+            id="siteLogo"
+            src="./assets/img/common/logo.svg"
+            alt="Корешков Design"
+          >
+          <span class="logo-fallback">Корешков Design</span>
+        </a>
+        <button class="mobile-toggle" type="button" aria-label="Открыть меню">≡</button>
+        <div class="nav-links">
+          <a href="#about">Обо мне</a>
+          <a href="#services">Услуги</a>
+          <a href="#cases">Кейсы</a>
+          <a href="#process">Процесс</a>
+          <a href="#contact">Контакт</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="eyebrow">Graphic designer</div>
+          <h1>Корешков делает <span>дизайн</span>, который видно</h1>
+          <p class="hero-text">Айдентика, афиши, презентации, полиграфия, мерч и брендинг для событий, лагерей и молодёжных проектов.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#cases">Смотреть кейсы</a>
+            <a class="btn btn-secondary" href="mailto:korewkov.des@gmail.com">Написать</a>
+          </div>
+        </div>
+
+        <div class="hero-poster reveal" aria-label="Декоративный постер">
+          <div class="hero-photo">
+            <img src="./assets/img/common/hero.png" alt="Александр Корешков">
+          </div>
+          <div class="poster-big">visual<em>boom</em></div>
+        </div>
+      </div>
+
+      <div class="hero-blobs" aria-hidden="true">
+        <span class="hero-blob" data-home-x="14" data-home-y="20" data-zone="16">Айдентика</span>
+        <span class="hero-blob" data-home-x="52" data-home-y="15" data-zone="14">Афиши</span>
+        <span class="hero-blob" data-home-x="82" data-home-y="33" data-zone="12">Полиграфия</span>
+        <span class="hero-blob" data-home-x="24" data-home-y="74" data-zone="14">Презентации</span>
+        <span class="hero-blob" data-home-x="70" data-home-y="80" data-zone="12">Мерч</span>
+      </div>
+    </header>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>identity</span><span>posters</span><span>print</span><span>branding</span><span>presentations</span><span>merch</span><span>graphic design</span>
+        <span>identity</span><span>posters</span><span>print</span><span>branding</span><span>presentations</span><span>merch</span><span>graphic design</span>
+      </div>
+    </div>
+
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-photo-card reveal">
+            <img class="about-portrait" src="./assets/img/common/block-2-photo.png" alt="Александр Корешков">
+          </div>
+
+          <div class="about-right">
+            <div class="about-info-card reveal">
+              <span class="label">About</span>
+              <h2>Обо мне<br>коротко</h2>
+              <p class="about-lead">Я графический дизайнер из Кузбасса. Создаю айдентику, афиши, презентации, полиграфию, мерч и визуальные материалы для событий, университетов, культурных площадок и брендов.</p>
+              <div class="about-facts">
+                <span>21 год</span>
+                <span>графический дизайнер</span>
+                <span>фриланс</span>
+                <span>события / бренды / печать</span>
+              </div>
+            </div>
+
+            <div class="about-timeline-card reveal">
+              <div class="about-mini-title">Опыт</div>
+              <div class="timeline-list">
+                <div class="timeline-item">
+                  <div class="timeline-date">2022 — 2024</div>
+                  <div><div class="timeline-role">Пресс-служба / визуальная коммуникация</div><div class="timeline-place">Российские студенческие отряды</div></div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-date">2023 — н.в.</div>
+                  <div><div class="timeline-role">Фриланс-дизайн</div><div class="timeline-place">айдентика, афиши, презентации, печатные материалы</div></div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-date">2024 — н.в.</div>
+                  <div><div class="timeline-role">Графический / мультимедийный дизайнер</div><div class="timeline-place">ДК Куб, ТопСувенир, СибГИУ</div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-contact-card reveal">
+              <div>
+                <div class="about-mini-title">Образование</div>
+                <h3>Колледж<br>при СибГИУ</h3>
+                <p class="timeline-place">Информационные системы и программирование · 2020–2024</p>
+              </div>
+              <div class="contact-links">
+                <div class="about-mini-title">Контакты</div>
+                <a href="tel:+79132998037">+7 (913) 299 80 37</a>
+                <a href="mailto:korewkov.des@gmail.com">korewkov.des@gmail.com</a>
+                <a href="https://t.me/korewkov" target="_blank" rel="noopener">tg: @korewkov</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="services-head reveal">
+          <div>
+            <span class="label">Services</span>
+            <h2 class="services-title-xl">Что<br>можно<br>собрать</h2>
+          </div>
+          <div class="services-head-copy">
+            <p class="services-lead">Делаю визуал для брендов, событий, лагерей, университетов и молодёжных проектов. От стиля до носителей.</p>
+            <div class="services-quick-tags">
+              <span>Айдентика</span>
+              <span>Афиши</span>
+              <span>Презентации</span>
+              <span>Полиграфия</span>
+              <span>Мерч</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="services-showcase">
+          <article class="service-card service-card-main reveal">
+            <div class="service-card-top">
+              <span class="service-index">01</span>
+              <span class="service-type">Основа бренда</span>
+            </div>
+            <div>
+              <h3>Айдентика</h3>
+              <p>Узнаваемый образ для проекта, события, лагеря или команды.</p>
+            </div>
+            <div class="service-points">
+              <span>логотип</span>
+              <span>цвета</span>
+              <span>шрифты</span>
+              <span>носители</span>
+            </div>
+          </article>
+
+          <article class="service-card service-card-wide reveal">
+            <div class="service-card-top">
+              <span class="service-index">02</span>
+              <span class="service-type">Для продвижения</span>
+            </div>
+            <div>
+              <h3>Афиши и постеры</h3>
+              <p>Визуал для концертов, слётов, фестивалей и городских событий.</p>
+            </div>
+            <div class="service-points">
+              <span>афиши</span>
+              <span>баннеры</span>
+              <span>обложки</span>
+              <span>наружка</span>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-card-top">
+              <span class="service-index">03</span>
+              <span class="service-type">Для защиты</span>
+            </div>
+            <div>
+              <h3>Презентации</h3>
+              <p>Слайды для проектов, отчётов, выступлений и упаковки идей.</p>
+            </div>
+            <div class="service-points">
+              <span>питч</span>
+              <span>отчёт</span>
+              <span>выступление</span>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-card-top">
+              <span class="service-index">04</span>
+              <span class="service-type">Для печати</span>
+            </div>
+            <div>
+              <h3>Полиграфия</h3>
+              <p>Печатные материалы для событий, брендов, презентаций и навигации.</p>
+            </div>
+            <div class="service-points">
+              <span>буклеты</span>
+              <span>каталоги</span>
+              <span>листовки</span>
+            </div>
+          </article>
+
+          <article class="service-card service-card-accent reveal">
+            <div class="service-card-top">
+              <span class="service-index">05</span>
+              <span class="service-type">В реальный мир</span>
+            </div>
+            <div>
+              <h3>Мерч</h3>
+              <p>Одежда, бейджи, стикеры и сувенирка, которые работают вне экрана.</p>
+            </div>
+            <div class="service-points">
+              <span>футболки</span>
+              <span>бейджи</span>
+              <span>стикеры</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="label">Selected cases</span>
+            <h2>Избранные кейсы</h2>
+          </div>
+          <p class="section-copy">Кейсы из портфолио: от сувенирной продукции для Ямала и визуала Всероссийского слёта РСО до фирменных стилей, полиграфии и брендинга студенческих отрядов.</p>
+        </div>
+
+        <div class="case-controls reveal">
+          <input class="case-search" id="caseSearch" type="search" placeholder="Найти кейс по слову: Ямал, мерч, РСО..." autocomplete="off">
+          <div class="custom-select" id="caseTypeFilter" data-filter="type"></div>
+          <div class="custom-select" id="caseSphereFilter" data-filter="sphere"></div>
+        </div>
+        <div class="case-results-note reveal" id="caseResultsNote">Показаны приоритетные кейсы</div>
+
+        <div class="cases-grid">
+          <article class="case-card reveal" tabindex="0" role="button" data-case="yamal">
+            <div class="case-top"><span>Merch / Exhibition</span><span>01</span></div>
+            <div>
+              <h3 class="case-title"><span>Ямал</span> — сувенирная продукция и ГУМ</h3>
+              <p class="case-desc">120+ макетов для каталога сувенирной продукции: одежда, аксессуары, рекламные баннеры и элементы застройки.</p>
+            </div>
+          </article>
+
+          <article class="case-card reveal" tabindex="0" role="button" data-case="rso">
+            <div class="case-top"><span>Event / RSO</span><span>02</span></div>
+            <div>
+              <h3 class="case-title"><span>РСО</span> — Всероссийский слёт 2025</h3>
+              <p class="case-desc">Более 350 макетов для главного молодёжного события РСО: digital, полиграфия, навигация и сувенирка.</p>
+            </div>
+          </article>
+
+          <article class="case-card reveal" tabindex="0" role="button" data-case="dkcub">
+            <div class="case-top"><span>Culture / Print</span><span>03</span></div>
+            <div>
+              <h3 class="case-title"><span>ДК Куб</span> — графика для культуры</h3>
+              <p class="case-desc">Материалы для культурных событий: афиши, городской визуал, мерч, полиграфия и современный образ учреждения.</p>
+            </div>
+          </article>
+
+          <article class="case-card reveal" tabindex="0" role="button" data-case="sibgiu">
+            <div class="case-top"><span>University / Print</span><span>04</span></div>
+            <div>
+              <h3 class="case-title"><span>СибГИУ</span> — визуальная коммуникация</h3>
+              <p class="case-desc">Навигационные и информационные макеты, стикеры, образовательные и рекламные материалы.</p>
+            </div>
+          </article>
+
+          <article class="case-card reveal" tabindex="0" role="button" data-case="siberianway">
+            <div class="case-top"><span>Branding / Recruiting</span><span>05</span></div>
+            <div>
+              <h3 class="case-title"><span>Сибирский путь</span> — бренд отряда проводников</h3>
+              <p class="case-desc">Фирменный стиль студенческого отряда проводников: от рекрутинговых материалов до мерча и полиграфии.</p>
+            </div>
+          </article>
+
+          <article class="case-card reveal" tabindex="0" role="button" data-case="squads">
+            <div class="case-top"><span>Identity / Squads</span><span>06</span></div>
+            <div>
+              <h3 class="case-title"><span>Отрядные бренды</span> — Заря, Сопрано, события</h3>
+              <p class="case-desc">Серия фирменных стилей для студенческих отрядов и мероприятий: персонажи, мерч, карточки, постеры и визуальные системы.</p>
+            </div>
+          </article>
+        </div>
+        <div class="cases-actions reveal">
+          <button class="btn btn-secondary" type="button" id="casesToggle">Показать все кейсы</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="process-section" id="process">
+      <div class="container">
+        <div class="process-head reveal">
+          <div class="process-head-left">
+            <span class="label">Process</span>
+            <h2 class="process-title-xl">Как<br>работаем</h2>
+          </div>
+          <div class="process-head-right">
+            <p class="process-lead">Работа идёт по понятным шагам: сначала разбираемся в задаче, потом выбираем стиль, делаем первый вариант и доводим его до готового результата.</p>
+          </div>
+        </div>
+
+        <div class="process-line reveal"></div>
+
+        <div class="work-grid">
+          <article class="work-step reveal">
+            <div>
+              <div class="process-card-top">
+                <span class="process-step-num">01</span>
+                <span class="process-step-dot"></span>
+              </div>
+              <h3>Разбираем задачу</h3>
+              <p>Обсуждаем, что нужно сделать, где это будет использоваться и кто это увидит.</p>
+            </div>
+            <div class="process-card-result">
+              <span>На выходе</span>
+              <strong>Понятно, что делаем</strong>
+            </div>
+          </article>
+
+          <article class="work-step reveal">
+            <div>
+              <div class="process-card-top">
+                <span class="process-step-num">02</span>
+                <span class="process-step-dot"></span>
+              </div>
+              <h3>Выбираем стиль</h3>
+              <p>Смотрим примеры, определяем настроение и решаем, каким должен быть визуал.</p>
+            </div>
+            <div class="process-card-result">
+              <span>На выходе</span>
+              <strong>Есть понятный стиль</strong>
+            </div>
+          </article>
+
+          <article class="work-step reveal">
+            <div>
+              <div class="process-card-top">
+                <span class="process-step-num">03</span>
+                <span class="process-step-dot"></span>
+              </div>
+              <h3>Делаю первый вариант</h3>
+              <p>Собираю не сырой черновик, а нормальную версию, которую уже можно смотреть и править.</p>
+            </div>
+            <div class="process-card-result">
+              <span>На выходе</span>
+              <strong>Есть что обсуждать</strong>
+            </div>
+          </article>
+
+          <article class="work-step reveal">
+            <div>
+              <div class="process-card-top">
+                <span class="process-step-num">04</span>
+                <span class="process-step-dot"></span>
+              </div>
+              <h3>Доводим до финала</h3>
+              <p>Вносим правки, готовим нужные форматы и собираем файлы для печати, презентаций и цифровых носителей.</p>
+            </div>
+            <div class="process-card-result">
+              <span>На выходе</span>
+              <strong>Файлы готовы к запуску</strong>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2>Есть проект? Давай сделаем громко.</h2>
+          <p>Напиши, если нужен визуал для события, бренда, презентации, мерча или печатных материалов.</p>
+          <p class="cta-note">Обычно отвечаю в течение дня и сразу уточняю задачу, сроки и формат.</p>
+          <form class="brief-form" id="briefForm">
+            <label>
+              ФИО
+              <input type="text" name="name" placeholder="Например, Александр Корешков" required>
+            </label>
+            <label>
+              Телефон
+              <input type="tel" name="phone" id="phoneInput" placeholder="+7 (999) 000-00-00" inputmode="tel" autocomplete="tel" required>
+            </label>
+            <label>
+              Социальная сеть
+              <input type="text" name="contact" placeholder="ВК / ТГ / MAX / почта" required>
+            </label>
+            <label>
+              Тип проекта
+              <select name="type" required>
+                <option value="">Выбери тип</option>
+                <option>Айдентика</option>
+                <option>Полиграфия</option>
+                <option>Диджитал</option>
+                <option>Мерч</option>
+              </select>
+            </label>
+            <label class="full">
+              Комментарий
+              <textarea name="message" placeholder="Опиши, что хочешь получить: задачу, формат, аудиторию, носители и примерный вайб" required></textarea>
+            </label>
+            <button class="btn" type="submit">Собрать заявку</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>© Александр Корешков</span>
+        <span>identity / posters / print / merch</span>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal" id="caseModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Закрыть окно">×</button>
+      <div class="modal-kicker" id="modalKicker">Case</div>
+      <h3 class="modal-title" id="modalTitle">Название кейса</h3>
+      <p class="modal-text" id="modalText">Описание кейса</p>
+      <div class="case-gallery" id="caseGallery">
+        <div class="gallery-main" id="galleryMain">
+          <div class="gallery-placeholder"><span>Здесь будет визуал кейса</span></div>
+          <div class="gallery-nav">
+            <button class="gallery-btn" type="button" id="galleryPrev" aria-label="Предыдущее изображение">‹</button>
+            <button class="gallery-btn" type="button" id="galleryNext" aria-label="Следующее изображение">›</button>
+          </div>
+        </div>
+        <div class="gallery-meta">
+          <span id="galleryCaption">Добавь изображения в массив case.images</span>
+          <span id="galleryCounter">0 / 0</span>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+      </div>
+      <ul class="modal-list" id="modalList"></ul>
+      <div class="modal-actions">
+        <a class="btn btn-primary modal-request" href="#contact">Оставить заявку</a>
+        <button class="btn btn-secondary modal-similar" type="button">Посмотреть похожее</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="admin-fab" type="button" id="adminOpen" aria-label="Открыть админ-панель">＋</button>
+
+  <div class="admin-panel" id="adminPanel" aria-hidden="true">
+    <div class="admin-card" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+      <div class="admin-head">
+        <div>
+          <h3 id="adminTitle">Админка кейсов</h3>
+          <p>Добавляй и редактируй кейсы как черновик. Изменения сохраняются в браузере, а через экспорт можно получить готовый JSON для файла <code>assets/data/cases.json</code>.</p>
+        </div>
+        <button class="admin-close" type="button" id="adminClose" aria-label="Закрыть админ-панель">×</button>
+      </div>
+
+      <form class="admin-form" id="adminForm">
+        <label>
+          Тип работы
+          <select name="workTag" required>
+            <option value="">Выбери тип</option>
+            <option value="Айдентика">Айдентика</option>
+            <option value="Полиграфия">Полиграфия</option>
+            <option value="Диджитал">Диджитал</option>
+            <option value="Мерч">Мерч</option>
+          </select>
+        </label>
+        <label>
+          Сфера проекта
+          <select name="sphereTag" required>
+            <option value="">Выбери сферу</option>
+            <option value="Университет">Университет</option>
+            <option value="Культура">Культура</option>
+            <option value="Госсектор">Госсектор</option>
+            <option value="Коммерция">Коммерция</option>
+            <option value="Студенческие отряды">Студенческие отряды</option>
+            <option value="Молодёжные проекты">Молодёжные проекты</option>
+          </select>
+        </label>
+        <label>
+          Приоритет
+          <select name="priority" required>
+            <option value="3">Очень важный — показывать выше</option>
+            <option value="2" selected>Важный</option>
+            <option value="1">Обычный</option>
+            <option value="0">В архив</option>
+          </select>
+        </label>
+        <label class="full">
+          Заголовок кейса
+          <input type="text" name="cardTitle" placeholder="Ямал — сувенирная продукция и ГУМ" required>
+        </label>
+        <label class="full">
+          Описание кейса
+          <textarea name="text" placeholder="Первый абзац автоматически попадёт на карточку. Далее можно писать подробности: задача, подход, результат." required></textarea>
+        </label>
+        <label class="full">
+          Тезисы / результаты
+          <textarea name="points" maxlength="360" placeholder="Каждый тезис с новой строки. Один тезис — до 58 символов: 350+ макетов, 20 000+ участников, полный комплект носителей" required></textarea>
+        </label>
+        <label class="full">
+          Галерея
+          <textarea name="images" placeholder="Первая строка становится обложкой карточки.&#10;Формат: ссылка-на-картинку | подпись&#10;images/case-01.jpg | Главный визуал&#10;images/case-02.jpg | Мерч и носители"></textarea>
+        </label>
+        <p class="admin-hint">Первая строка в галерее становится обложкой карточки. Эта админка работает как локальный редактор и генератор JSON. Чтобы обновить сайт на GitHub Pages, экспортируй JSON и вставь его в файл assets/data/cases.json.</p>
+        <div class="admin-actions">
+          <button class="btn btn-primary" type="submit" id="adminSubmit">Добавить кейс</button>
+          <button class="btn btn-secondary" type="button" id="adminCancelEdit">Отменить редактирование</button>
+          <button class="btn btn-secondary" type="button" id="adminExport">Экспорт cases.json</button>
+          <button class="btn btn-secondary" type="button" id="adminClear">Сбросить изменения</button>
+        </div>
+      </form>
+
+      <div class="admin-list">
+        <div class="admin-list-title">Все кейсы сайта</div>
+        <div id="adminCaseList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Готово</div>
+
+  <script>
+    const revealItems = document.querySelectorAll('.reveal');
+    const nav = document.querySelector('.nav');
+    const navLinks = document.querySelector('.nav-links');
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const siteLogo = document.querySelector('#siteLogo');
+    const logoFallback = document.querySelector('.logo-fallback');
+    const hero = document.querySelector('.hero');
+    const heroPoster = document.querySelector('.hero-poster');
+    const heroBlobs = document.querySelectorAll('.hero-blob');
+    const casesGrid = document.querySelector('.cases-grid');
+    const casesToggle = document.querySelector('#casesToggle');
+    const caseSearch = document.querySelector('#caseSearch');
+    const caseTypeFilter = document.querySelector('#caseTypeFilter');
+    const caseSphereFilter = document.querySelector('#caseSphereFilter');
+    const caseResultsNote = document.querySelector('#caseResultsNote');
+    const processSection = document.querySelector('#process');
+    const processLine = document.querySelector('.process-line');
+    const workSteps = document.querySelectorAll('.work-step');
+    const ctaBox = document.querySelector('.cta-box');
+    const modal = document.querySelector('#caseModal');
+    const modalClose = document.querySelector('.modal-close');
+    const modalTitle = document.querySelector('#modalTitle');
+    const modalKicker = document.querySelector('#modalKicker');
+    const modalText = document.querySelector('#modalText');
+    const modalList = document.querySelector('#modalList');
+    const galleryMain = document.querySelector('#galleryMain');
+    const galleryThumbs = document.querySelector('#galleryThumbs');
+    const galleryCaption = document.querySelector('#galleryCaption');
+    const galleryCounter = document.querySelector('#galleryCounter');
+    const modalRequest = document.querySelector('.modal-request');
+    const modalSimilar = document.querySelector('.modal-similar');
+    const toast = document.querySelector('#toast');
+    const briefForm = document.querySelector('#briefForm');
+    const phoneInput = document.querySelector('#phoneInput');
+    const copyEmail = document.querySelector('.copy-email');
+    const adminOpen = document.querySelector('#adminOpen');
+    const adminClose = document.querySelector('#adminClose');
+    const adminPanel = document.querySelector('#adminPanel');
+    const adminForm = document.querySelector('#adminForm');
+    const adminSubmit = document.querySelector('#adminSubmit');
+    const adminCancelEdit = document.querySelector('#adminCancelEdit');
+    const adminExport = document.querySelector('#adminExport');
+    const adminClear = document.querySelector('#adminClear');
+    const adminCaseList = document.querySelector('#adminCaseList');
+
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4j5BVbtAflHApMHKMA7GY8nJGP5XzJPyZ_oGF1sJ1Cbuh0MkIEMReCn3Az_sbCCs0FA/exec';
+    const CASES_JSON_URL = './assets/data/cases.json';
+    const CASES_IMAGE_BASE = './assets/img/cases/';
+    const AUTO_IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
+    const AUTO_IMAGE_LIMIT = 24;
+    const ADMIN_KEY = 'korewkov';
+    const ADMIN_STORAGE_KEY = 'korewkovAdminAccess';
+    const LOGO_SOURCES = [
+      './assets/img/common/logo.svg',
+      'assets/img/common/logo.svg',
+      '/assets/img/common/logo.svg'
+    ];
+    const FALLBACK_EMAIL = 'korewkov.des@gmail.com';
+    const WORK_TAGS = ['Айдентика', 'Полиграфия', 'Диджитал', 'Мерч'];
+    const SPHERE_TAGS = ['Университет', 'Культура', 'Госсектор', 'Коммерция', 'Студенческие отряды', 'Молодёжные проекты'];
+    const CASES_LIMIT = 4;
+    const MAX_POINT_LENGTH = 58;
+
+    const padCaseNumber = (number) => String(number).padStart(2, '0');
+
+    const getCaseImageFolder = (id, item = {}) => {
+      return item.imageFolder || item.folder || id;
+    };
+
+    const initLogoFallback = () => {
+      if (!siteLogo) return;
+      let logoAttempt = 0;
+
+      siteLogo.addEventListener('load', () => {
+        siteLogo.classList.remove('is-hidden');
+        if (logoFallback) logoFallback.classList.remove('is-visible');
+      });
+
+      siteLogo.addEventListener('error', () => {
+        logoAttempt += 1;
+        if (logoAttempt < LOGO_SOURCES.length) {
+          siteLogo.src = LOGO_SOURCES[logoAttempt];
+          return;
+        }
+
+        siteLogo.classList.add('is-hidden');
+        if (logoFallback) logoFallback.classList.add('is-visible');
+      });
+    };
+
+    initLogoFallback();
+
+    const getAdminAccessFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('admin') === ADMIN_KEY || window.location.hash === '#admin-' + ADMIN_KEY;
+    };
+
+    const enableAdminAccess = () => {
+      localStorage.setItem(ADMIN_STORAGE_KEY, 'true');
+      adminOpen.classList.add('is-visible');
+    };
+
+    const initAdminAccess = () => {
+      if (!adminOpen) return;
+
+      if (getAdminAccessFromUrl()) {
+        enableAdminAccess();
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+        showToast('Режим владельца включён');
+        return;
+      }
+
+      if (localStorage.getItem(ADMIN_STORAGE_KEY) === 'true') {
+        adminOpen.classList.add('is-visible');
+      }
+    };
+
+    const defaultCases = {
+      yamal: {
+        imageFolder: 'case-01',
+        cardKicker: 'Айдентика',
+        workTag: 'Айдентика',
+        sphereTag: 'Госсектор',
+        cardTitle: 'Ямал — сувенирная продукция и ГУМ',
+        cardDesc: '120+ макетов для каталога сувенирной продукции: одежда, аксессуары, рекламные баннеры и элементы застройки.',
+        kicker: 'Айдентика / Госсектор',
+        title: 'Ямал — сувенирная продукция и застройка для ГУМа',
+        priority: 3,
+        text: 'Проект про масштаб и системность. Было разработано более 120 макетов для каталога сувенирной продукции: от одежды и аксессуаров до рекламных баннеров. Отдельно — участие в команде разработки застройки для ГУМа и юбилея Ямолод.',
+        points: [
+          '120+ макетов сувенирной продукции',
+          'Одежда, аксессуары, баннеры',
+          'Застройка для ГУМа и Ямолод',
+          'Единая система носителей'
+        ],
+        images: [
+          { src: '', caption: 'Свитшот, значки и сувенирная продукция' },
+          { src: '', caption: 'Навигация, кружки, ленты и одежда' },
+          { src: '', caption: 'Застройка и выставочные носители' },
+          { src: '', caption: 'Оформление пространства и рекламные материалы' }
+        ]
+      },
+      rso: {
+        imageFolder: 'case-02',
+        cardKicker: 'Диджитал',
+        workTag: 'Диджитал',
+        sphereTag: 'Студенческие отряды',
+        cardTitle: 'РСО — Всероссийский слёт 2025',
+        cardDesc: 'Более 350 макетов для главного молодёжного события РСО: digital, полиграфия, навигация и сувенирка.',
+        kicker: 'Диджитал / Студенческие отряды',
+        title: 'РСО — Всероссийский слёт студенческих отрядов',
+        priority: 3,
+        text: 'Кейс про работу с большим событием и большим количеством форматов. За время подготовки было разработано более 350 макетов: digital-материалы, полиграфия, навигация, сувенирная продукция и визуал для мероприятий слёта.',
+        points: [
+          '350+ макетов для события',
+          'Полиграфия, digital, навигация',
+          '20 000+ студентов со всей России',
+          'Визуал для площадок слёта'
+        ],
+        images: [
+          { src: '', caption: 'Главная графика и логика визуальной системы слёта' },
+          { src: '', caption: 'Карточки, навигация и информационные материалы' },
+          { src: '', caption: 'Баннеры, экраны и оформление площадок' },
+          { src: '', caption: 'Паттерны, графические элементы и сувенирка' }
+        ]
+      },
+      dkcub: {
+        imageFolder: 'case-03',
+        cardKicker: 'Полиграфия',
+        workTag: 'Полиграфия',
+        sphereTag: 'Культура',
+        cardTitle: 'ДК Куб — графика для культуры',
+        cardDesc: 'Материалы для культурных событий: афиши, городской визуал, мерч, полиграфия и современный образ учреждения.',
+        kicker: 'Полиграфия / Культура',
+        title: 'ДК Куб — визуал для культурного центра',
+        priority: 2,
+        text: 'С февраля 2024 года велась работа с МАУ МКДК Куйбышевского района. Визуал должен был уйти от устаревшего образа учреждения и адаптироваться под современные тренды, сохранив понятность для городской аудитории.',
+        points: [
+          '50+ афиш и рекламных макетов',
+          'Городские события и печатные материалы',
+          'Мерч и печатные носители',
+          'Более живой образ учреждения'
+        ],
+        images: [
+          { src: '', caption: 'Мерч и визуальные носители ДК Куб' },
+          { src: '', caption: 'Стикеры, пакеты и оформление печатных и цифровых материалов' },
+          { src: '', caption: 'Афиши городских и культурных событий' },
+          { src: '', caption: 'Наружные рекламные форматы' }
+        ]
+      },
+      sibgiu: {
+        imageFolder: 'case-04',
+        cardKicker: 'Полиграфия',
+        workTag: 'Полиграфия',
+        sphereTag: 'Университет',
+        cardTitle: 'СибГИУ — визуальная коммуникация',
+        cardDesc: 'навигационные и информационные макеты, стикеры, образовательные и рекламные материалы.',
+        kicker: 'Полиграфия / Университет',
+        title: 'СибГИУ — дизайн для университета',
+        priority: 2,
+        text: 'С апреля 2025 года — работа с Сибирским государственным индустриальным университетом. Проект включает навигационные и информационные макеты, рекламные и образовательные материалы.',
+        points: [
+          '20+ материалов для университета',
+          'Стикеры, навигация, материалы',
+          'Коммуникация для абитуриентов',
+          'Живая подача сложной информации'
+        ],
+        images: [
+          { src: '', caption: 'Стикеры, маскоты и элементы университетского визуала' },
+          { src: '', caption: 'Информационные и рекламные материалы' },
+          { src: '', caption: 'Информационные материалы для абитуриентов' },
+          { src: '', caption: 'Серии визуальных материалов и образовательные рубрики' }
+        ]
+      },
+      siberianway: {
+        imageFolder: 'case-05',
+        cardKicker: 'Айдентика',
+        workTag: 'Айдентика',
+        sphereTag: 'Студенческие отряды',
+        cardTitle: 'Сибирский путь — бренд отряда проводников',
+        cardDesc: 'Фирменный стиль студенческого отряда проводников: от рекрутинговых материалов до мерча и полиграфии.',
+        kicker: 'Айдентика / Студенческие отряды',
+        title: 'Сибирский путь — бренд студенческого отряда проводников',
+        priority: 1,
+        text: 'Фирменный стиль для студенческого отряда проводников: рекрутинговые плакаты, рекрутинговые карточки, мерч и визуальная система вокруг темы железной дороги, команды и молодёжного движения.',
+        points: [
+          'Рекрутинг проводников',
+          'рекрутинговые карточки и поздравления',
+          'Мерч и элементы айдентики',
+          'Узнаваемый образ отряда'
+        ],
+        images: [
+          { src: '', caption: 'Рекрутинговые материалы отряда проводников' },
+          { src: '', caption: 'Мерч и элементы айдентики' },
+          { src: '', caption: 'рекрутинговые карточки и поздравительные визуалы' },
+          { src: '', caption: 'Визуальная система для коммуникации отряда' }
+        ]
+      },
+      squads: {
+        imageFolder: 'case-06',
+        cardKicker: 'Айдентика',
+        workTag: 'Айдентика',
+        sphereTag: 'Студенческие отряды',
+        cardTitle: 'Отрядные бренды — Заря, Сопрано, события',
+        cardDesc: 'Серия фирменных стилей для студенческих отрядов и мероприятий: персонажи, мерч, карточки, постеры и визуальные системы.',
+        kicker: 'Айдентика / Студенческие отряды',
+        title: 'Отрядные бренды — Заря, Сопрано и события студотрядов',
+        priority: 1,
+        text: 'Серия авантюрных фирменных стилей для студенческих отрядов и мероприятий: сервисный отряд «Заря», отряд проводников «Сопрано», визуал событий и визуальные системы с персонажами, иллюстрациями и яркими носителями.',
+        points: [
+          'Брендинг отряда «Заря»',
+          'Айдентика отряда «Сопрано»',
+          'Карточки, дипломы, баннеры',
+          'Разные миры под разные команды'
+        ],
+        images: [
+          { src: '', caption: 'Фирменный стиль сервисного отряда «Заря»' },
+          { src: '', caption: 'Визуальная система и носители отряда «Заря»' },
+          { src: '', caption: 'Брендинг отряда проводников «Сопрано»' },
+          { src: '', caption: 'Оформление мероприятий студенческих отрядов' }
+        ]
+      }
+    };
+
+    const getCustomCases = () => JSON.parse(localStorage.getItem('korreshkovCustomCases') || '{}');
+    const saveCustomCases = (customCases) => localStorage.setItem('korreshkovCustomCases', JSON.stringify(customCases));
+    let externalCases = {};
+    let cases = { ...defaultCases, ...getCustomCases() };
+
+    const normalizeCasesData = (data) => {
+      if (Array.isArray(data)) {
+        return data.reduce((acc, item) => {
+          if (!item) return acc;
+          const id = item.id || makeCaseId(item.cardTitle || item.title || 'case');
+          acc[id] = item;
+          delete acc[id].id;
+          return acc;
+        }, {});
+      }
+
+      if (data && Array.isArray(data.cases)) {
+        return normalizeCasesData(data.cases);
+      }
+
+      if (data && typeof data === 'object') {
+        return data;
+      }
+
+      return {};
+    };
+
+    const syncCasesState = () => {
+      cases = { ...defaultCases, ...externalCases, ...getCustomCases() };
+    };
+
+    const loadCasesData = async () => {
+      try {
+        const response = await fetch(CASES_JSON_URL, { cache: 'no-store' });
+        if (!response.ok) throw new Error('cases.json not found');
+        externalCases = normalizeCasesData(await response.json());
+      } catch (error) {
+        externalCases = {};
+        console.info('cases.json не найден, используются встроенные кейсы.');
+      }
+
+      syncCasesState();
+    };
+    let activeGalleryIndex = 0;
+    let showAllCases = false;
+    let activeCaseCategory = 'Все';
+    let activeCaseSphere = 'Все сферы';
+    let caseSearchQuery = '';
+    let adminEditingId = null;
+
+    const showToast = (message) => {
+      toast.textContent = message;
+      toast.classList.add('show');
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove('show'), 2600);
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+
+    const observeRevealItems = () => {
+      document.querySelectorAll('.reveal:not(.visible)').forEach((item, index) => {
+        item.style.transitionDelay = Math.min(index * 45, 260) + 'ms';
+        revealObserver.observe(item);
+      });
+    };
+
+    const getFirstParagraph = (text) => {
+      return String(text || '')
+        .split(String.fromCharCode(10))
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean)[0] || '';
+    };
+
+    const normalizePoints = (pointsText) => {
+      return String(pointsText || '')
+        .split(String.fromCharCode(10))
+        .map((point) => point.trim())
+        .filter(Boolean)
+        .map((point) => point.length > MAX_POINT_LENGTH ? point.slice(0, MAX_POINT_LENGTH - 1).trim() + '…' : point);
+    };
+
+    const makeCaseId = (title) => {
+      const slug = String(title || 'case')
+        .toLowerCase()
+        .replace(/ё/g, 'e')
+        .replace(/[^a-zа-я0-9]+/gi, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 42);
+      return 'custom-' + (slug || 'case') + '-' + Date.now();
+    };
+
+    const getCaseWorkTag = (item) => item.workTag || item.cardKicker || item.kicker || 'Айдентика';
+    const getCaseSphereTag = (item) => item.sphereTag || 'Молодёжные проекты';
+    const getCaseLabel = (item) => getCaseWorkTag(item) + ' / ' + getCaseSphereTag(item);
+
+    const getCaseSearchText = (item) => {
+      return [
+        getCaseWorkTag(item),
+        getCaseSphereTag(item),
+        item.cardKicker,
+        item.kicker,
+        item.cardTitle,
+        item.title,
+        item.text,
+        item.cardDesc,
+        ...(item.points || []),
+        ...(item.images || []).map((image) => image.caption || '')
+      ].join(' ').toLowerCase();
+    };
+
+    const getSortedCases = () => Object.entries(cases).sort(([, caseA], [, caseB]) => {
+      const priorityDiff = Number(caseB.priority ?? 1) - Number(caseA.priority ?? 1);
+      if (priorityDiff !== 0) return priorityDiff;
+      return String(caseA.title).localeCompare(String(caseB.title), 'ru');
+    });
+
+    const getFilteredCases = () => {
+      const query = caseSearchQuery.trim().toLowerCase();
+      return getSortedCases().filter(([, item]) => {
+        const typeMatch = activeCaseCategory === 'Все' || getCaseWorkTag(item) === activeCaseCategory;
+        const sphereMatch = activeCaseSphere === 'Все сферы' || getCaseSphereTag(item) === activeCaseSphere;
+        const queryMatch = !query || getCaseSearchText(item).includes(query);
+        return typeMatch && sphereMatch && queryMatch;
+      });
+    };
+
+    const getCaseCategories = () => ['Все', ...WORK_TAGS];
+    const getCaseSpheres = () => ['Все сферы', ...SPHERE_TAGS];
+
+    const renderCustomSelect = (container, options, activeValue) => {
+      const arrow = '<svg class="custom-select-arrow" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7L9 12L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      const optionButtons = options.map((option) => {
+        const activeClass = option === activeValue ? ' is-active' : '';
+        return '<button class="custom-select-option' + activeClass + '" type="button" data-select-option="' + option + '">' + option + '</button>';
+      }).join('');
+
+      container.innerHTML = '<button class="custom-select-trigger" type="button"><span>' + activeValue + '</span>' + arrow + '</button><div class="custom-select-menu">' + optionButtons + '</div>';
+    };
+
+    const renderCaseFilters = () => {
+      renderCustomSelect(caseTypeFilter, getCaseCategories(), activeCaseCategory);
+      renderCustomSelect(caseSphereFilter, getCaseSpheres(), activeCaseSphere);
+    };
+
+    const formatCaseTitle = (item) => {
+      const rawTitle = String(item.cardTitle || item.title || 'Кейс без названия').trim();
+      const legacyTitle = rawTitle.startsWith('—') && item.accent ? item.accent + ' ' + rawTitle : rawTitle;
+      const parts = legacyTitle.split(' ');
+      const firstWord = parts.shift() || legacyTitle;
+      const rest = parts.join(' ');
+      return '<span>' + firstWord + '</span>' + (rest ? ' ' + rest : '');
+    };
+
+    const bindCaseCards = () => {
+      document.querySelectorAll('.case-card').forEach((card) => {
+        if (card.dataset.caseReady) return;
+        card.dataset.caseReady = 'true';
+        card.addEventListener('click', () => openCase(card.dataset.case));
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openCase(card.dataset.case);
+          }
+        });
+      });
+    };
+
+    const bindCardMotion = () => {
+      document.querySelectorAll('.case-card, .service-card').forEach((card) => {
+        if (card.dataset.motionReady) return;
+        card.dataset.motionReady = 'true';
+        card.addEventListener('mousemove', (event) => {
+          if (window.innerWidth < 900) return;
+          const rect = card.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+          const rotateY = ((x / rect.width) - 0.5) * 6;
+          const rotateX = ((y / rect.height) - 0.5) * -6;
+          card.style.transform = 'perspective(900px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-6px)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    };
+
+    const updateProcessProgress = () => {
+      if (!processSection || !processLine) return;
+      const rect = processSection.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const progress = Math.max(0, Math.min(1, (viewport * .72 - rect.top) / Math.max(rect.height - viewport * .28, 1)));
+      processLine.style.setProperty('--process-progress', Math.round(progress * 100) + '%');
+
+      const activeIndex = Math.min(workSteps.length - 1, Math.max(0, Math.floor(progress * workSteps.length)));
+      workSteps.forEach((step, index) => step.classList.toggle('is-active', index === activeIndex));
+    };
+
+    const updateBriefProgress = () => {
+      if (!briefForm || !ctaBox) return;
+      const fields = Array.from(briefForm.querySelectorAll('input, textarea, select'));
+      const filled = fields.filter((field) => String(field.value || '').trim()).length;
+      const percent = fields.length ? Math.round((filled / fields.length) * 100) : 0;
+      ctaBox.style.setProperty('--brief-progress', percent + '%');
+      ctaBox.classList.toggle('is-complete', percent === 100);
+      fields.forEach((field) => field.classList.toggle('is-filled', Boolean(String(field.value || '').trim())));
+    };
+
+    const getCaseCover = (item) => {
+      const firstImage = (item.images || []).find((image) => image && image.src);
+      if (firstImage && firstImage.src) {
+        const alt = firstImage.caption || item.cardTitle || item.title || 'Обложка кейса';
+        return '<div class="case-cover"><img src="' + firstImage.src + '" alt="' + alt + '"></div>';
+      }
+      return '<div class="case-cover"><div class="case-cover-placeholder">No image</div></div>';
+    };
+
+    const getCaseCardMarkup = ([id, item], extraClass = '') => {
+      return '<article class="case-card ' + extraClass + '" tabindex="0" role="button" data-case="' + id + '">' +
+        getCaseCover(item) +
+        '<div class="case-body">' +
+          '<div class="case-top"><span>' + getCaseLabel(item) + '</span></div>' +
+          '<div>' +
+            '<h3 class="case-title">' + formatCaseTitle(item) + '</h3>' +
+            '<p class="case-desc">' + (getFirstParagraph(item.text) || item.cardDesc || '') + '</p>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    };
+
+    const buildCaseCardsMarkup = (entries, animateNew = false) => {
+      return entries.map((entry, index) => {
+        const extraClass = animateNew && index >= CASES_LIMIT ? 'case-enter' : '';
+        return getCaseCardMarkup(entry, extraClass);
+      }).join('');
+    };
+
+    const measureCasesHeight = (markup) => {
+      const clone = casesGrid.cloneNode(false);
+      clone.innerHTML = markup || '<div class="case-empty">По этому запросу кейсов пока нет</div>';
+      clone.style.position = 'absolute';
+      clone.style.left = '-9999px';
+      clone.style.top = '0';
+      clone.style.width = casesGrid.getBoundingClientRect().width + 'px';
+      clone.style.height = 'auto';
+      clone.style.visibility = 'hidden';
+      clone.style.pointerEvents = 'none';
+      clone.style.transition = 'none';
+      casesGrid.parentNode.appendChild(clone);
+      const height = clone.scrollHeight;
+      clone.remove();
+      return height;
+    };
+
+    const animateCasesToMarkup = (targetMarkup, options = {}) => {
+      const startHeight = casesGrid.getBoundingClientRect().height;
+      const nextHeight = measureCasesHeight(targetMarkup);
+      const updateBefore = Boolean(options.updateBefore);
+
+      casesGrid.style.height = startHeight + 'px';
+      casesGrid.style.overflow = 'hidden';
+
+      if (updateBefore) {
+        casesGrid.innerHTML = targetMarkup;
+        bindCaseCards();
+        bindCardMotion();
+      }
+
+      requestAnimationFrame(() => {
+        casesGrid.style.height = nextHeight + 'px';
+      });
+
+      window.setTimeout(() => {
+        if (!updateBefore) {
+          casesGrid.innerHTML = targetMarkup;
+          bindCaseCards();
+          bindCardMotion();
+        }
+        casesGrid.style.height = '';
+        casesGrid.style.overflow = '';
+      }, 540);
+    };
+
+    const renderCaseCards = () => {
+      renderCaseFilters();
+      const filteredCases = getFilteredCases();
+      const visibleCases = showAllCases ? filteredCases : filteredCases.slice(0, CASES_LIMIT);
+
+      if (!visibleCases.length) {
+        casesGrid.innerHTML = '<div class="case-empty">По этому запросу кейсов пока нет</div>';
+      } else {
+        casesGrid.innerHTML = buildCaseCardsMarkup(visibleCases);
+      }
+
+      const isFiltered = activeCaseCategory !== 'Все' || activeCaseSphere !== 'Все сферы' || caseSearchQuery.trim();
+      caseResultsNote.textContent = isFiltered ? 'Найдено кейсов: ' + filteredCases.length : 'Показаны приоритетные кейсы';
+
+      if (filteredCases.length <= CASES_LIMIT) {
+        casesToggle.style.display = 'none';
+      } else {
+        casesToggle.style.display = 'inline-flex';
+        casesToggle.textContent = showAllCases ? 'Свернуть кейсы' : 'Показать все кейсы (' + filteredCases.length + ')';
+      }
+
+      bindCaseCards();
+      bindCardMotion();
+    };
+
+    const serializeImages = (images) => {
+      return (images || []).map((image) => {
+        return (image.src || '') + (image.caption ? ' | ' + image.caption : '');
+      }).join(String.fromCharCode(10));
+    };
+
+    const setAdminEditing = (caseId) => {
+      const item = cases[caseId];
+      if (!item) return;
+
+      adminEditingId = caseId;
+      adminForm.elements.workTag.value = getCaseWorkTag(item);
+      adminForm.elements.sphereTag.value = getCaseSphereTag(item);
+      adminForm.elements.priority.value = String(item.priority ?? 1);
+      adminForm.elements.cardTitle.value = item.cardTitle || item.title || '';
+      adminForm.elements.text.value = item.text || '';
+      adminForm.elements.points.value = (item.points || []).join(String.fromCharCode(10));
+      adminForm.elements.images.value = serializeImages(item.images || []);
+      adminSubmit.textContent = 'Сохранить кейс';
+      adminCancelEdit.style.display = 'inline-flex';
+      showToast('Кейс открыт для редактирования');
+      adminForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    const resetAdminForm = () => {
+      adminEditingId = null;
+      adminForm.reset();
+      adminSubmit.textContent = 'Добавить кейс';
+      adminCancelEdit.style.display = 'none';
+    };
+
+    const renderAdminList = () => {
+      const customCases = getCustomCases();
+      const entries = Object.entries(cases);
+
+      adminCaseList.innerHTML = entries.map(([id, item]) => {
+        const isDefault = Boolean(defaultCases[id] || externalCases[id]);
+        const isChanged = Boolean(customCases[id]);
+        const state = isDefault ? (isChanged ? 'изменённый базовый кейс' : 'базовый кейс') : 'добавленный кейс';
+        const secondaryAction = isDefault
+          ? '<button class="admin-small-btn" type="button" data-reset-case="' + id + '">Вернуть</button>'
+          : '<button class="admin-small-btn" type="button" data-delete-case="' + id + '">Удалить</button>';
+
+        return '<div class="admin-case-row">' +
+          '<div><strong>' + (item.cardTitle || item.title) + '</strong><span>' + getCaseLabel(item) + ' · приоритет ' + (item.priority ?? 1) + ' · ' + ((item.images || []).length) + ' изображений · ' + state + '</span></div>' +
+          '<div class="admin-row-actions">' +
+            '<button class="admin-small-btn" type="button" data-edit-case="' + id + '">Редактировать</button>' +
+            secondaryAction +
+          '</div>' +
+        '</div>';
+      }).join('');
+    };
+
+    const renderGallery = (caseData, index = 0) => {
+      const images = caseData.images || [];
+      activeGalleryIndex = Math.max(0, Math.min(index, images.length - 1));
+      const current = images[activeGalleryIndex];
+      const hasRealImage = current && current.src;
+      const currentCaption = current && current.caption ? current.caption : 'Здесь будет визуал кейса';
+      const navMarkup = '<div class="gallery-nav"><button class="gallery-btn" type="button" id="galleryPrev" aria-label="Предыдущее изображение">‹</button><button class="gallery-btn" type="button" id="galleryNext" aria-label="Следующее изображение">›</button></div>';
+
+      galleryMain.innerHTML = hasRealImage
+        ? '<img src="' + current.src + '" alt="' + currentCaption + '">' + navMarkup
+        : '<div class="gallery-placeholder"><span>' + currentCaption + '</span></div>' + navMarkup;
+
+      galleryCaption.textContent = currentCaption;
+      galleryCounter.textContent = images.length ? (activeGalleryIndex + 1) + ' / ' + images.length : '0 / 0';
+
+      galleryThumbs.innerHTML = images.map((image, thumbIndex) => {
+        const activeClass = thumbIndex === activeGalleryIndex ? ' is-active' : '';
+        const thumbContent = image.src
+          ? '<img src="' + image.src + '" alt="' + (image.caption || 'Миниатюра') + '">'
+          : '<span>' + String(thumbIndex + 1).padStart(2, '0') + '</span>';
+        return '<button class="gallery-thumb' + activeClass + '" type="button" data-gallery-index="' + thumbIndex + '" aria-label="Открыть изображение ' + (thumbIndex + 1) + '">' + thumbContent + '</button>';
+      }).join('');
+    };
+
+    const moveGallery = (direction) => {
+      const currentCase = cases[modal.dataset.currentCase];
+      if (!currentCase || !currentCase.images || !currentCase.images.length) return;
+      const nextIndex = (activeGalleryIndex + direction + currentCase.images.length) % currentCase.images.length;
+      renderGallery(currentCase, nextIndex);
+    };
+
+    const openCase = (caseId) => {
+      const data = cases[caseId];
+      if (!data) return;
+      modalKicker.textContent = getCaseLabel(data);
+      modalTitle.textContent = data.title || data.cardTitle;
+      modalText.textContent = data.text || '';
+      modalList.innerHTML = (data.points || []).map((point) => '<li>' + point + '</li>').join('');
+      modal.dataset.currentCase = caseId;
+      renderGallery(data, 0);
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeCase = () => {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    const initHeroBlobPhysics = () => {
+      if (!hero || !heroBlobs.length) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const randomBetween = (min, max) => min + Math.random() * (max - min);
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+      const getBounds = () => {
+        const rect = hero.getBoundingClientRect();
+        return {
+          width: rect.width,
+          height: rect.height,
+          left: rect.left,
+          top: rect.top
+        };
+      };
+
+      let bounds = getBounds();
+      let activeState = null;
+      let activePointerId = null;
+      let lastPointer = { x: 0, y: 0, time: 0 };
+      let pointer = { x: -9999, y: -9999, active: false };
+
+      const blobStates = Array.from(heroBlobs).map((blob) => {
+        const rect = blob.getBoundingClientRect();
+        const startXPercent = Number(blob.dataset.homeX || randomBetween(16, 82));
+        const startYPercent = Number(blob.dataset.homeY || randomBetween(18, 78));
+
+        return {
+          el: blob,
+          x: clamp(bounds.width * startXPercent / 100 - rect.width / 2, 0, Math.max(0, bounds.width - rect.width)),
+          y: clamp(bounds.height * startYPercent / 100 - rect.height / 2, 0, Math.max(0, bounds.height - rect.height)),
+          width: rect.width,
+          height: rect.height,
+          vx: randomBetween(-.22, .22),
+          vy: randomBetween(-.16, .16),
+          driftX: randomBetween(-.006, .006),
+          driftY: randomBetween(-.006, .006),
+          phase: randomBetween(0, Math.PI * 2),
+          rotation: randomBetween(-8, 8),
+          rotationSpeed: randomBetween(-.008, .008),
+          scale: 1,
+          hoverTilt: 0,
+          isNear: false,
+          isDragging: false,
+          grabX: 0,
+          grabY: 0
+        };
+      });
+
+      const refreshSizes = () => {
+        bounds = getBounds();
+        blobStates.forEach((state) => {
+          const rect = state.el.getBoundingClientRect();
+          state.width = rect.width;
+          state.height = rect.height;
+          state.x = clamp(state.x, 0, Math.max(0, bounds.width - state.width));
+          state.y = clamp(state.y, 0, Math.max(0, bounds.height - state.height));
+        });
+      };
+
+      const applyTransform = (state) => {
+        const totalRotation = state.rotation + state.hoverTilt;
+        state.el.style.transform = 'translate3d(' + state.x.toFixed(2) + 'px, ' + state.y.toFixed(2) + 'px, 0) rotate(' + totalRotation.toFixed(2) + 'deg) scale(' + state.scale.toFixed(3) + ')';
+      };
+
+      const releaseActiveBlob = () => {
+        if (!activeState) return;
+        activeState.isDragging = false;
+        activeState.el.classList.remove('is-dragging');
+        activeState.el.classList.remove('is-near');
+        activeState.isNear = false;
+        try {
+          if (activePointerId !== null) activeState.el.releasePointerCapture(activePointerId);
+        } catch (error) {}
+        activeState = null;
+        activePointerId = null;
+      };
+
+      const resolveBlobCollisions = () => {
+        blobStates.forEach((a, indexA) => {
+          blobStates.slice(indexA + 1).forEach((b) => {
+            if (a.isDragging || b.isDragging) return;
+
+            const ax = a.x + a.width / 2;
+            const ay = a.y + a.height / 2;
+            const bx = b.x + b.width / 2;
+            const by = b.y + b.height / 2;
+            const dx = bx - ax;
+            const dy = by - ay;
+            const distance = Math.max(Math.sqrt(dx * dx + dy * dy), 1);
+            const minDistance = (Math.max(a.width, a.height) + Math.max(b.width, b.height)) * .5 + 12;
+
+            if (distance >= minDistance) return;
+
+            const overlap = minDistance - distance;
+            const nx = dx / distance;
+            const ny = dy / distance;
+            const push = overlap * .018;
+            const spin = overlap * .0007;
+
+            a.vx -= nx * push;
+            a.vy -= ny * push;
+            b.vx += nx * push;
+            b.vy += ny * push;
+
+            a.x -= nx * overlap * .08;
+            a.y -= ny * overlap * .08;
+            b.x += nx * overlap * .08;
+            b.y += ny * overlap * .08;
+
+            a.rotationSpeed -= spin;
+            b.rotationSpeed += spin;
+          });
+        });
+      };
+
+      const animate = () => {
+        const time = performance.now() * .001;
+
+        resolveBlobCollisions();
+
+        blobStates.forEach((state) => {
+          if (!state.isDragging) {
+            const softFriction = .985;
+            const maxSpeed = 1.05;
+            const floatForce = .0045;
+            const centerX = state.x + state.width / 2;
+            const centerY = state.y + state.height / 2;
+            const pointerDx = centerX - (pointer.x - bounds.left);
+            const pointerDy = centerY - (pointer.y - bounds.top);
+            const pointerDistance = Math.max(Math.sqrt(pointerDx * pointerDx + pointerDy * pointerDy), 1);
+            const reactionRadius = 150;
+            const shouldReact = pointer.active && pointerDistance < reactionRadius;
+
+            state.isNear = shouldReact;
+            state.el.classList.toggle('is-near', shouldReact);
+
+            if (shouldReact) {
+              const force = (1 - pointerDistance / reactionRadius) * .085;
+              state.vx += (pointerDx / pointerDistance) * force;
+              state.vy += (pointerDy / pointerDistance) * force;
+              state.scale += (1.075 - state.scale) * .16;
+              state.hoverTilt += ((pointerDx > 0 ? 4 : -4) - state.hoverTilt) * .12;
+            } else {
+              state.scale += (1 - state.scale) * .12;
+              state.hoverTilt += (0 - state.hoverTilt) * .12;
+              state.el.classList.remove('is-near');
+            }
+
+            state.vx += Math.cos(time * .75 + state.phase) * floatForce + state.driftX;
+            state.vy += Math.sin(time * .68 + state.phase) * floatForce + state.driftY;
+
+            state.vx = clamp(state.vx, -maxSpeed, maxSpeed);
+            state.vy = clamp(state.vy, -maxSpeed, maxSpeed);
+
+            state.x += state.vx;
+            state.y += state.vy;
+            state.rotation += state.rotationSpeed;
+
+            state.vx *= softFriction;
+            state.vy *= softFriction;
+            state.rotationSpeed = clamp(state.rotationSpeed * .992, -.045, .045);
+
+            const maxX = Math.max(0, bounds.width - state.width);
+            const maxY = Math.max(0, bounds.height - state.height);
+
+            if (state.x <= 0) {
+              state.x = 0;
+              state.vx = Math.abs(state.vx) * .74 + .12;
+              state.driftX = Math.abs(state.driftX);
+            }
+
+            if (state.x >= maxX) {
+              state.x = maxX;
+              state.vx = -Math.abs(state.vx) * .74 - .12;
+              state.driftX = -Math.abs(state.driftX);
+            }
+
+            if (state.y <= 0) {
+              state.y = 0;
+              state.vy = Math.abs(state.vy) * .74 + .08;
+              state.driftY = Math.abs(state.driftY);
+            }
+
+            if (state.y >= maxY) {
+              state.y = maxY;
+              state.vy = -Math.abs(state.vy) * .74 - .08;
+              state.driftY = -Math.abs(state.driftY);
+            }
+          }
+
+          applyTransform(state);
+        });
+
+        requestAnimationFrame(animate);
+      };
+
+      blobStates.forEach((state) => {
+        applyTransform(state);
+
+        state.el.addEventListener('pointerdown', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          refreshSizes();
+          releaseActiveBlob();
+
+          const rect = state.el.getBoundingClientRect();
+          state.isDragging = true;
+          state.grabX = event.clientX - rect.left;
+          state.grabY = event.clientY - rect.top;
+          state.vx = 0;
+          state.vy = 0;
+          state.rotationSpeed *= .25;
+          state.el.classList.add('is-dragging');
+          state.el.classList.add('is-near');
+          state.scale = 1.08;
+          activeState = state;
+          activePointerId = event.pointerId;
+          state.el.setPointerCapture(event.pointerId);
+          lastPointer = { x: event.clientX, y: event.clientY, time: performance.now() };
+        });
+
+        state.el.addEventListener('pointermove', (event) => {
+          if (!state.isDragging) return;
+          event.preventDefault();
+
+          const now = performance.now();
+          const dt = Math.max(16, now - lastPointer.time);
+          const pointerVelocityX = (event.clientX - lastPointer.x) / dt;
+          const pointerVelocityY = (event.clientY - lastPointer.y) / dt;
+
+          state.x = clamp(event.clientX - bounds.left - state.grabX, 0, Math.max(0, bounds.width - state.width));
+          state.y = clamp(event.clientY - bounds.top - state.grabY, 0, Math.max(0, bounds.height - state.height));
+
+          state.vx = clamp(pointerVelocityX * 5.5, -1.2, 1.2);
+          state.vy = clamp(pointerVelocityY * 5.5, -1.2, 1.2);
+          state.rotationSpeed = clamp(pointerVelocityX * .018, -.035, .035);
+
+          lastPointer = { x: event.clientX, y: event.clientY, time: now };
+        });
+
+        state.el.addEventListener('pointerup', releaseActiveBlob);
+        state.el.addEventListener('pointercancel', releaseActiveBlob);
+        state.el.addEventListener('lostpointercapture', releaseActiveBlob);
+        state.el.addEventListener('pointerleave', () => {
+          if (!state.isDragging) {
+            state.el.classList.remove('is-near');
+            state.isNear = false;
+          }
+        });
+      });
+
+      hero.addEventListener('pointermove', (event) => {
+        pointer.x = event.clientX;
+        pointer.y = event.clientY;
+        pointer.active = true;
+      });
+
+      hero.addEventListener('pointerleave', () => {
+        pointer.active = false;
+        blobStates.forEach((state) => {
+          if (!state.isDragging) {
+            state.el.classList.remove('is-near');
+            state.isNear = false;
+          }
+        });
+      });
+
+      document.addEventListener('pointerup', releaseActiveBlob);
+      window.addEventListener('blur', releaseActiveBlob);
+      window.addEventListener('resize', refreshSizes);
+      requestAnimationFrame(animate);
+    };
+
+    const handleCustomSelect = (container, onSelect) => {
+      container.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const trigger = event.target.closest('.custom-select-trigger');
+        const option = event.target.closest('[data-select-option]');
+
+        if (trigger) {
+          document.querySelectorAll('.custom-select').forEach((select) => {
+            if (select !== container) select.classList.remove('is-open');
+          });
+          container.classList.toggle('is-open');
+          return;
+        }
+
+        if (option) {
+          event.preventDefault();
+          onSelect(option.dataset.selectOption);
+          container.classList.remove('is-open');
+        }
+      });
+    };
+
+    const startApp = async () => {
+      await loadCasesData();
+      renderCaseCards();
+      renderAdminList();
+      resetAdminForm();
+      initAdminAccess();
+      observeRevealItems();
+      if (window.innerWidth > 680) {
+        initHeroBlobPhysics();
+      }
+
+      window.setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.visible)').forEach((item) => {
+          item.classList.add('visible');
+        });
+      }, 900);
+    };
+
+    startApp();
+
+    handleCustomSelect(caseTypeFilter, (value) => {
+      activeCaseCategory = value;
+      showAllCases = false;
+      renderCaseCards();
+    });
+
+    handleCustomSelect(caseSphereFilter, (value) => {
+      activeCaseSphere = value;
+      showAllCases = false;
+      renderCaseCards();
+    });
+
+    caseSearch.addEventListener('input', () => {
+      caseSearchQuery = caseSearch.value;
+      showAllCases = false;
+      renderCaseCards();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.custom-select')) {
+        document.querySelectorAll('.custom-select').forEach((select) => select.classList.remove('is-open'));
+      }
+    });
+
+    casesToggle.addEventListener('click', () => {
+      const filteredCases = getFilteredCases();
+      const shouldShowAll = !showAllCases;
+      const visibleCases = shouldShowAll ? filteredCases : filteredCases.slice(0, CASES_LIMIT);
+      const targetMarkup = buildCaseCardsMarkup(visibleCases, shouldShowAll);
+
+      showAllCases = shouldShowAll;
+      casesToggle.textContent = showAllCases ? 'Свернуть кейсы' : 'Показать все кейсы (' + filteredCases.length + ')';
+
+      animateCasesToMarkup(targetMarkup, {
+        updateBefore: shouldShowAll
+      });
+    });
+
+    modalClose.addEventListener('click', closeCase);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeCase();
+    });
+
+    galleryMain.addEventListener('click', (event) => {
+      if (event.target.closest('#galleryPrev')) moveGallery(-1);
+      if (event.target.closest('#galleryNext')) moveGallery(1);
+    });
+
+    galleryThumbs.addEventListener('click', (event) => {
+      const thumb = event.target.closest('.gallery-thumb');
+      if (!thumb) return;
+      renderGallery(cases[modal.dataset.currentCase], Number(thumb.dataset.galleryIndex));
+    });
+
+    if (modalRequest) {
+      modalRequest.addEventListener('click', () => {
+        closeCase();
+      });
+    }
+
+    if (modalSimilar) {
+      modalSimilar.addEventListener('click', () => {
+        const currentId = modal.dataset.currentCase;
+        const currentCase = cases[currentId];
+        if (!currentCase) return;
+
+        const similar = getSortedCases().find(([id, item]) => {
+          if (id === currentId) return false;
+          return getCaseWorkTag(item) === getCaseWorkTag(currentCase) || getCaseSphereTag(item) === getCaseSphereTag(currentCase);
+        });
+
+        if (similar) {
+          openCase(similar[0]);
+        } else {
+          showToast('Похожих кейсов пока нет');
+        }
+      });
+    }
+
+    adminOpen.addEventListener('click', () => {
+      if (localStorage.getItem(ADMIN_STORAGE_KEY) !== 'true') return;
+      adminPanel.classList.add('open');
+      adminPanel.setAttribute('aria-hidden', 'false');
+    });
+
+    adminClose.addEventListener('click', () => {
+      adminPanel.classList.remove('open');
+      adminPanel.setAttribute('aria-hidden', 'true');
+    });
+
+    adminPanel.addEventListener('click', (event) => {
+      if (event.target === adminPanel) {
+        adminPanel.classList.remove('open');
+        adminPanel.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    adminForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(adminForm));
+      const id = adminEditingId || makeCaseId(data.cardTitle);
+      const customCases = getCustomCases();
+      const images = data.images.split(String.fromCharCode(10)).map((line) => line.trim()).filter(Boolean).map((line) => {
+        const parts = line.split('|').map((part) => part.trim());
+        return { src: parts[0], caption: parts[1] || 'Визуал кейса' };
+      });
+
+      customCases[id] = {
+        cardKicker: data.workTag,
+        workTag: data.workTag,
+        sphereTag: data.sphereTag,
+        priority: Number(data.priority),
+        cardTitle: data.cardTitle,
+        kicker: data.workTag + ' / ' + data.sphereTag,
+        title: data.cardTitle,
+        text: data.text,
+        points: normalizePoints(data.points),
+        images
+      };
+
+      saveCustomCases(customCases);
+      syncCasesState();
+      renderCaseCards();
+      renderAdminList();
+      showToast(adminEditingId ? 'Кейс сохранён' : 'Кейс добавлен');
+      resetAdminForm();
+    });
+
+    adminCaseList.addEventListener('click', (event) => {
+      const editButton = event.target.closest('[data-edit-case]');
+      const deleteButton = event.target.closest('[data-delete-case]');
+      const resetButton = event.target.closest('[data-reset-case]');
+      const customCases = getCustomCases();
+
+      if (editButton) {
+        setAdminEditing(editButton.dataset.editCase);
+        return;
+      }
+
+      if (deleteButton) {
+        delete customCases[deleteButton.dataset.deleteCase];
+        saveCustomCases(customCases);
+        syncCasesState();
+        renderCaseCards();
+        renderAdminList();
+        resetAdminForm();
+        showToast('Кейс удалён');
+        return;
+      }
+
+      if (resetButton) {
+        delete customCases[resetButton.dataset.resetCase];
+        saveCustomCases(customCases);
+        syncCasesState();
+        renderCaseCards();
+        renderAdminList();
+        resetAdminForm();
+        showToast('Базовый кейс возвращён');
+      }
+    });
+
+    adminCancelEdit.addEventListener('click', () => {
+      resetAdminForm();
+      showToast('Редактирование отменено');
+    });
+
+    adminExport.addEventListener('click', async () => {
+      const exportCases = { ...defaultCases, ...externalCases, ...getCustomCases() };
+      const text = JSON.stringify(exportCases, null, 2);
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast('cases.json скопирован в буфер');
+      } catch {
+        console.log(text);
+        showToast('cases.json выведен в консоль');
+      }
+    });
+
+    adminClear.addEventListener('click', () => {
+      localStorage.removeItem('korreshkovCustomCases');
+      syncCasesState();
+      renderCaseCards();
+      renderAdminList();
+      resetAdminForm();
+      showToast('Все изменения кейсов сброшены');
+    });
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      mobileToggle.textContent = navLinks.classList.contains('open') ? '×' : '≡';
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        mobileToggle.textContent = '≡';
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      nav.style.boxShadow = window.scrollY > 40 ? '0 16px 50px rgba(0,0,0,.35)' : 'none';
+      updateProcessProgress();
+    });
+
+    window.addEventListener('resize', updateProcessProgress);
+    updateProcessProgress();
+
+
+    const formatRuPhone = (value) => {
+      let digits = (String(value || '').match(/[0-9]/g) || []).join('');
+
+      if (digits.startsWith('8')) digits = '7' + digits.slice(1);
+      if (!digits.startsWith('7')) digits = '7' + digits;
+
+      digits = digits.slice(0, 11);
+
+      const local = digits.slice(1);
+      const part1 = local.slice(0, 3);
+      const part2 = local.slice(3, 6);
+      const part3 = local.slice(6, 8);
+      const part4 = local.slice(8, 10);
+
+      let formatted = '+7';
+      if (part1) formatted += ' (' + part1;
+      if (part1.length === 3) formatted += ')';
+      if (part2) formatted += ' ' + part2;
+      if (part3) formatted += '-' + part3;
+      if (part4) formatted += '-' + part4;
+
+      return formatted;
+    };
+
+    const initPhoneMask = () => {
+      if (!phoneInput) return;
+
+      phoneInput.addEventListener('focus', () => {
+        if (!phoneInput.value.trim()) {
+          phoneInput.value = '+7';
+        }
+      });
+
+      phoneInput.addEventListener('input', () => {
+        phoneInput.value = formatRuPhone(phoneInput.value);
+      });
+
+      phoneInput.addEventListener('blur', () => {
+        const digits = (phoneInput.value.match(/[0-9]/g) || []).join('');
+        if (digits.length <= 1) phoneInput.value = '';
+      });
+    };
+
+    initPhoneMask();
+
+    const savedBrief = JSON.parse(localStorage.getItem('korreshkovBrief') || '{}');
+    Object.entries(savedBrief).forEach(([key, value]) => {
+      const field = briefForm.elements[key];
+      if (field) field.value = key === 'phone' ? formatRuPhone(value) : value;
+    });
+
+    briefForm.addEventListener('input', () => {
+      const data = Object.fromEntries(new FormData(briefForm));
+      localStorage.setItem('korreshkovBrief', JSON.stringify(data));
+      updateBriefProgress();
+    });
+
+    updateBriefProgress();
+
+    briefForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const submitButton = briefForm.querySelector('button[type="submit"]');
+      const data = Object.fromEntries(new FormData(briefForm));
+      const subject = 'Заявка на дизайн: ' + (data.type || 'проект');
+      const body = ['Привет, Александр!', '', 'Хочу обсудить проект.', '', 'ФИО: ' + data.name, 'Телефон: ' + data.phone, 'Социальная сеть: ' + data.contact, 'Тип проекта: ' + data.type, '', 'Комментарий:', data.message].join(String.fromCharCode(10));
+      const payload = {
+        date: new Date().toLocaleString('ru-RU'),
+        name: data.name,
+        phone: data.phone,
+        contact: data.contact,
+        type: data.type,
+        deadline: '',
+        message: data.message,
+        source: window.location.href,
+        status: 'Новая'
+      };
+
+      localStorage.setItem('korreshkovBrief', JSON.stringify(data));
+
+      if (!GOOGLE_SCRIPT_URL) {
+        showToast('Не указан URL Google Apps Script. Открываю письмо.');
+        window.location.href = 'mailto:' + FALLBACK_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = 'Отправляю...';
+
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        briefForm.reset();
+        localStorage.removeItem('korreshkovBrief');
+        updateBriefProgress();
+        showToast('Заявка отправлена. Проверь таблицу через 5–10 секунд.');
+      } catch (error) {
+        console.error(error);
+        showToast('Не получилось отправить. Открываю письмо.');
+        window.location.href = 'mailto:' + FALLBACK_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Собрать заявку';
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('open')) closeCase();
+      if (event.key === 'Escape' && adminPanel.classList.contains('open')) {
+        adminPanel.classList.remove('open');
+        adminPanel.setAttribute('aria-hidden', 'true');
+      }
+      if (event.key === 'ArrowLeft' && modal.classList.contains('open')) moveGallery(-1);
+      if (event.key === 'ArrowRight' && modal.classList.contains('open')) moveGallery(1);
+    });
+  </script>
+</body>
+</html>
